@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Books and Podcasts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #0a0d12;
+  --bg-elev:  #131720;
+  --bg-card:  #161c26;
+  --border:   #252d3a;
+  --border-h: #36414f;
+  --text:     #e4ecf5;
+  --text-dim: #8895a7;
+  --text-faint:#5c6a7a;
+  --accent:   #7c5cff;
+  --spotify:  #1db954;
+  --amazon:   #ff9900;
+
+  --c-history:   #d29a4a;
+  --c-politics:  #ff7a59;
+  --c-philosophy:#9b8cff;
+  --c-learning:  #4dd4c6;
+  --c-geography: #5fb9ff;
+  --c-fiction:   #b97cff;
+  --c-thriller:  #ff5577;
+  --c-mystery:   #ffb84d;
+  --c-science:   #5fb9ff;
+  --c-ww2:       #e57373;
+  --c-rome:      #ff9a3c;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html,body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  line-height:1.5;
+}
+
+/* ── Animated background ───────────────────────── */
+.bg-wrap{
+  position:fixed;inset:0;z-index:0;
+  overflow:hidden;pointer-events:none;
+}
+.blob{
+  position:absolute;border-radius:50%;
+  filter:blur(100px);will-change:transform;
+}
+.b1{width:800px;height:800px;top:-300px;left:-250px;
+    background:radial-gradient(circle,rgba(80,55,170,0.13),transparent 70%);
+    animation:da 30s ease-in-out infinite;}
+.b2{width:600px;height:600px;bottom:-250px;right:-200px;
+    background:radial-gradient(circle,rgba(25,95,100,0.11),transparent 70%);
+    animation:db 24s ease-in-out infinite;}
+.b3{width:450px;height:450px;top:45%;left:45%;
+    background:radial-gradient(circle,rgba(55,60,95,0.1),transparent 70%);
+    animation:dc 19s ease-in-out infinite;}
+.b4{width:350px;height:350px;top:20%;right:15%;
+    background:radial-gradient(circle,rgba(90,55,35,0.08),transparent 70%);
+    animation:dd 36s ease-in-out infinite;}
+.b5{width:300px;height:300px;bottom:25%;left:10%;
+    background:radial-gradient(circle,rgba(35,80,110,0.09),transparent 70%);
+    animation:de 28s ease-in-out infinite;}
+
+@keyframes da{0%,100%{transform:translate(0,0) scale(1)}
+  25%{transform:translate(110px,70px) scale(1.08)}
+  50%{transform:translate(60px,160px) scale(0.94)}
+  75%{transform:translate(-50px,90px) scale(1.04)}}
+@keyframes db{0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(-90px,-80px) scale(1.12)}
+  66%{transform:translate(60px,-130px) scale(0.91)}}
+@keyframes dc{0%,100%{transform:translate(-50%,-50%) scale(1)}
+  50%{transform:translate(-60%,-40%) scale(1.22)}}
+@keyframes dd{0%,100%{transform:translate(0,0) scale(1)}
+  25%{transform:translate(-70px,50px) scale(1.1)}
+  50%{transform:translate(-40px,90px) scale(0.88)}
+  75%{transform:translate(50px,30px) scale(1.06)}}
+@keyframes de{0%,100%{transform:translate(0,0) scale(1)}
+  40%{transform:translate(80px,-60px) scale(1.15)}
+  80%{transform:translate(-40px,50px) scale(0.92)}}
+
+/* ── Layout ─────────────────────────────────────── */
+.container{
+  position:relative;z-index:1;
+  max-width:1300px;margin:0 auto;
+  padding:36px 24px 70px;
+}
+@media(max-width:680px){.container{padding:20px 14px 50px}}
+
+/* ── Header ─────────────────────────────────────── */
+header{
+  display:flex;align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;gap:14px;
+  margin-bottom:28px;
+}
+header h1{
+  font-size:2rem;font-weight:800;
+  letter-spacing:-0.025em;
+  background:linear-gradient(130deg,#fff 0%,#c4baee 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text;
+}
+.header-right{display:flex;align-items:center;gap:12px}
+.week-label{
+  font-size:0.8rem;color:var(--text-faint);
+  font-weight:500;letter-spacing:0.03em;
+}
+.archive-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--bg-elev);
+  border:1px solid var(--border);
+  color:var(--text-dim);
+  padding:8px 14px;border-radius:8px;
+  font-family:inherit;font-size:0.84rem;font-weight:500;
+  cursor:pointer;
+  transition:color 0.15s,border-color 0.15s,background 0.15s;
+}
+.archive-btn:hover{color:var(--text);border-color:var(--border-h)}
+
+/* ── Search ─────────────────────────────────────── */
+.search-wrap{margin-bottom:20px}
+.search-bar{position:relative;max-width:460px}
+.search-bar input{
+  width:100%;background:var(--bg-elev);
+  border:1px solid var(--border);color:var(--text);
+  padding:11px 42px 11px 16px;border-radius:10px;
+  font-family:inherit;font-size:0.92rem;
+  transition:border-color 0.15s;
+}
+.search-bar input::placeholder{color:var(--text-faint)}
+.search-bar input:focus{outline:none;border-color:var(--accent)}
+.clear-btn{
+  position:absolute;right:12px;top:50%;
+  transform:translateY(-50%);
+  background:none;border:none;
+  color:var(--text-faint);cursor:pointer;
+  font-size:0.88rem;padding:4px;line-height:1;display:none;
+}
+.search-bar input:not(:placeholder-shown)+.clear-btn{display:block}
+
+/* ── Tabs ────────────────────────────────────────── */
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.tab{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--bg-elev);border:1px solid var(--border);
+  color:var(--text-dim);padding:8px 14px;border-radius:8px;
+  font-family:inherit;font-size:0.86rem;font-weight:500;
+  cursor:pointer;white-space:nowrap;
+  transition:color 0.15s,border-color 0.15s,background 0.15s;
+}
+.tab:hover{color:var(--text);border-color:var(--border-h)}
+.tab.active{
+  color:#d6ccff;
+  background:rgba(124,92,255,0.1);
+  border-color:rgba(124,92,255,0.45);
+  font-weight:600;
+}
+.tab .badge{
+  background:rgba(255,255,255,0.06);
+  color:var(--text-faint);
+  padding:1px 7px;border-radius:10px;
+  font-size:0.7rem;font-weight:600;
+}
+.tab.active .badge{background:rgba(124,92,255,0.22);color:#c0b4ff}
+
+/* ── Section heading ─────────────────────────────── */
+.section-title{
+  font-size:1.15rem;font-weight:700;
+  letter-spacing:-0.01em;color:var(--text);
+  margin-bottom:16px;
+}
+
+/* ── Grid ────────────────────────────────────────── */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(255px,1fr));
+  gap:11px;
+}
+@media(max-width:500px){.grid{grid-template-columns:1fr}}
+
+/* ── Card ────────────────────────────────────────── */
+.card{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:10px;padding:16px;
+  display:flex;flex-direction:column;gap:6px;
+  text-decoration:none;color:inherit;
+  transition:border-color 0.14s,transform 0.12s,background 0.14s;
+}
+.card:hover{border-color:var(--border-h);transform:translateY(-3px);background:#1a2030}
+.card:active{transform:translateY(-1px)}
+.card .show-lbl{
+  font-size:0.68rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.08em;
+  color:var(--text-faint);margin-bottom:2px;
+}
+.card .c-title{
+  font-size:0.94rem;font-weight:700;
+  line-height:1.35;color:var(--text);
+}
+.card .c-sub{
+  font-size:0.8rem;color:var(--text-dim);line-height:1.4;
+}
+.card .tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.tag{
+  font-size:0.62rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.06em;
+  padding:2px 7px;border-radius:4px;
+}
+.tag.history   {background:rgba(210,154,74,0.14); color:var(--c-history)}
+.tag.politics  {background:rgba(255,122,89,0.14); color:var(--c-politics)}
+.tag.philosophy{background:rgba(155,140,255,0.14);color:var(--c-philosophy)}
+.tag.learning  {background:rgba(77,212,198,0.14); color:var(--c-learning)}
+.tag.geography {background:rgba(95,185,255,0.14); color:var(--c-geography)}
+.tag.fiction   {background:rgba(185,124,255,0.14);color:var(--c-fiction)}
+.tag.thriller  {background:rgba(255,85,119,0.14); color:var(--c-thriller)}
+.tag.mystery   {background:rgba(255,184,77,0.14); color:var(--c-mystery)}
+.tag.science   {background:rgba(95,185,255,0.14); color:var(--c-science)}
+.tag.ww2       {background:rgba(229,115,115,0.14);color:var(--c-ww2)}
+.tag.rome      {background:rgba(255,154,60,0.14); color:var(--c-rome)}
+.card .open-ln{
+  margin-top:auto;padding-top:10px;
+  font-size:0.79rem;font-weight:600;
+  display:flex;align-items:center;gap:5px;
+}
+.card.podcast .open-ln{color:var(--spotify)}
+.card.book    .open-ln{color:var(--amazon)}
+.card.article .open-ln{color:var(--accent)}
+.open-ln svg{width:13px;height:13px;flex-shrink:0;fill:currentColor}
+
+/* ── Empty ───────────────────────────────────────── */
+.empty{
+  grid-column:1/-1;text-align:center;
+  padding:48px 24px;color:var(--text-faint);
+  font-size:0.9rem;border:1px dashed var(--border);
+  border-radius:10px;
+}
+
+/* ── Archive overlay ─────────────────────────────── */
+.overlay{
+  position:fixed;inset:0;z-index:100;
+  background:rgba(0,0,0,0.65);
+  display:none;align-items:flex-start;justify-content:flex-end;
+}
+.overlay.open{display:flex}
+.archive-panel{
+  width:min(640px,100vw);height:100vh;
+  background:var(--bg-elev);
+  border-left:1px solid var(--border);
+  display:flex;flex-direction:column;
+  animation:slide-in 0.25s ease;
+}
+@keyframes slide-in{from{transform:translateX(100%)}to{transform:translateX(0)}}
+.arc-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 24px;border-bottom:1px solid var(--border);
+  flex-shrink:0;
+}
+.arc-head h2{font-size:1.1rem;font-weight:700}
+.close-arc{
+  background:none;border:none;color:var(--text-dim);
+  cursor:pointer;font-size:1.3rem;padding:4px;line-height:1;
+}
+.close-arc:hover{color:var(--text)}
+.arc-body{overflow-y:auto;flex:1;padding:20px 24px}
+.arc-week{margin-bottom:24px}
+.arc-week-label{
+  font-size:0.78rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.07em;
+  color:var(--text-faint);margin-bottom:12px;
+  padding-bottom:8px;border-bottom:1px solid var(--border);
+}
+.arc-section{margin-bottom:14px}
+.arc-section-title{
+  font-size:0.75rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:0.06em;
+  color:var(--accent);margin-bottom:8px;
+}
+.arc-list{display:flex;flex-direction:column;gap:6px}
+.arc-item{
+  display:flex;align-items:flex-start;gap:8px;
+  font-size:0.83rem;line-height:1.4;
+}
+.arc-item a{
+  color:var(--text-dim);text-decoration:none;
+  transition:color 0.12s;
+}
+.arc-item a:hover{color:var(--text)}
+.arc-item .arc-meta{
+  font-size:0.73rem;color:var(--text-faint);
+  flex-shrink:0;margin-top:1px;
+}
+.arc-empty{
+  text-align:center;padding:48px 20px;
+  color:var(--text-faint);font-size:0.9rem;
+}
+</style>
+</head>
+<body>
+
+<div class="bg-wrap" aria-hidden="true">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+  <div class="blob b4"></div>
+  <div class="blob b5"></div>
+</div>
+
+<div class="container">
+  <header>
+    <h1>Books and Podcasts</h1>
+    <div class="header-right">
+      <span class="week-label" id="week-label"></span>
+      <button class="archive-btn" id="open-arc" aria-label="Open archive">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+        Archive
+      </button>
+    </div>
+  </header>
+
+  <div class="search-wrap">
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Filter by title, author, show, topic…" autocomplete="off"/>
+      <button class="clear-btn" id="clear-btn" aria-label="Clear">✕</button>
+    </div>
+  </div>
+
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-tab="rp">Recent Podcasts <span class="badge">10</span></button>
+    <button class="tab" data-tab="op">Older Podcasts <span class="badge">20</span></button>
+    <button class="tab" data-tab="rb">Recent Books <span class="badge">5</span></button>
+    <button class="tab" data-tab="ob">Older Books <span class="badge">10</span></button>
+    <button class="tab" data-tab="ar">Weekly Articles <span class="badge">20</span></button>
+  </div>
+
+  <p class="section-title" id="section-title"></p>
+  <div class="grid" id="grid"></div>
+</div>
+
+<!-- Archive panel -->
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Archive">
+  <div class="archive-panel">
+    <div class="arc-head">
+      <h2>Archive</h2>
+      <button class="close-arc" id="close-arc" aria-label="Close">✕</button>
+    </div>
+    <div class="arc-body" id="arc-body"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+/* ── SVG icons ───────────────────────────────────── */
+var ICON_SP  = '<svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>';
+var ICON_AMZ = '<svg viewBox="0 0 24 24"><path d="M13.958 10.09c0 1.232.029 2.256-.591 3.351-.502.891-1.301 1.438-2.186 1.438-1.214 0-1.922-.924-1.922-2.292 0-2.692 2.415-3.182 4.699-3.182v.685zm3.186 7.705c-.209.189-.512.201-.745.074-1.052-.872-1.238-1.276-1.814-2.106-1.734 1.768-2.962 2.297-5.209 2.297-2.66 0-4.731-1.641-4.731-4.925 0-2.565 1.391-4.309 3.37-5.164 1.715-.754 4.11-.891 5.942-1.095V6.41c0-.753.06-1.642-.383-2.294-.385-.579-1.124-.82-1.775-.82-1.205 0-2.277.618-2.54 1.897-.054.285-.261.567-.549.582l-3.061-.33c-.259-.058-.548-.266-.472-.661C5.57 2.357 8.763 1.4 11.617 1.4c1.453 0 3.353.387 4.499 1.489 1.453 1.358 1.315 3.169 1.315 5.141v4.657c0 1.398.58 2.012 1.126 2.771.192.268.233.59-.01.791l-1.403 1.546zm2.99 1.54c-2.303 1.731-5.641 2.648-8.514 2.648-4.029 0-7.657-1.49-10.401-3.965-.216-.195-.023-.461.236-.31 2.961 1.723 6.622 2.759 10.406 2.759 2.552 0 5.358-.528 7.938-1.624.389-.166.718.254.335.492zm.95-1.08c-.295-.379-1.954-.18-2.7-.09-.226.026-.261-.169-.057-.312 1.323-.929 3.492-.661 3.746-.35.253.311-.066 2.486-1.308 3.52-.191.16-.373.074-.288-.137.279-.697.907-2.254.607-2.631z"/></svg>';
+var ICON_LNK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>';
+
+/* ── URL builders ────────────────────────────────── */
+function sp(q){return 'https://open.spotify.com/search/'+encodeURIComponent(q);}
+function amz(q){return 'https://www.amazon.co.uk/s?k='+encodeURIComponent(q)+'&i=stripbooks';}
+function art(title,source){
+  return 'https://www.google.com/search?q='+encodeURIComponent('"'+title+'" '+source);
+}
+
+/* ── Data pools ──────────────────────────────────── */
+/* Each category has enough entries for ≥4 non-repeating weeks.
+   Rotation: week N shows items [N*perWeek … (N+1)*perWeek-1] mod pool length. */
+
+var POOL = {};
+
+/* Recent Podcasts — 40 items (10/week × 4 weeks) */
+POOL.rp = [
+  /* wk 0 */
+  {show:'The Rest Is History',  title:'Julius Caesar: The Rubicon',            by:'Tom Holland & Dominic Sandbrook', tags:['history','rome'],   url:sp('The Rest Is History Julius Caesar The Rubicon')},
+  {show:'Triggernometry',       title:'Douglas Murray: The War on the West',   by:'Kisin & Foster',                  tags:['politics'],         url:sp('Triggernometry Douglas Murray War on the West')},
+  {show:'We Have Ways',         title:'The Battle of Stalingrad',              by:'James Holland & Al Murray',       tags:['history','ww2'],    url:sp('We Have Ways Making You Talk Battle of Stalingrad')},
+  {show:'Modern Wisdom',        title:'Peter Frankopan: Everything Is Connected',by:'Chris Williamson',             tags:['history','learning'],url:sp('Modern Wisdom Peter Frankopan Everything Is Connected')},
+  {show:'Heretics',             title:'Neil Oliver: The Great Reset Is a Lie', by:'Andrew Gold',                    tags:['politics','philosophy'],url:sp('Heretics Andrew Gold Neil Oliver Great Reset')},
+  {show:'This Is History',      title:'The First Crusade: God Wills It',       by:'Dan Jones',                      tags:['history'],           url:sp('This Is History Dan Jones First Crusade God Wills It')},
+  {show:'Empire',               title:'The East India Company',                by:'Dalrymple & Anand',              tags:['history','geography'],url:sp('Empire podcast Dalrymple Anand East India Company')},
+  {show:'Lotus Eaters Podcast', title:'The Decline of British Institutions',   by:'Carl Benjamin',                  tags:['politics'],          url:sp('Lotus Eaters Podcast Carl Benjamin British Institutions')},
+  {show:'History Hit',          title:'The Real Richard III',                  by:'Dan Snow',                       tags:['history'],           url:sp('History Hit Dan Snow Real Richard III')},
+  {show:'Intelligence Squared', title:'Is Democracy in Crisis?',               by:'IQ2 Debates',                    tags:['politics','philosophy'],url:sp('Intelligence Squared Is Democracy in Crisis')},
+  /* wk 1 */
+  {show:'The Rest Is History',  title:'The Norman Conquest: 1066',             by:'Tom Holland & Dominic Sandbrook',tags:['history'],           url:sp('The Rest Is History Norman Conquest 1066')},
+  {show:'Triggernometry',       title:'Peter Hitchens: Britain Has Lost Its Mind',by:'Kisin & Foster',             tags:['politics'],           url:sp('Triggernometry Peter Hitchens Britain Lost Its Mind')},
+  {show:'We Have Ways',         title:'Operation Barbarossa',                  by:'James Holland & Al Murray',      tags:['history','ww2'],     url:sp('We Have Ways Making You Talk Operation Barbarossa')},
+  {show:'Modern Wisdom',        title:'Douglas Murray: The Strange Death of Europe',by:'Chris Williamson',         tags:['politics','learning'],url:sp('Modern Wisdom Douglas Murray Strange Death of Europe')},
+  {show:'Heretics',             title:'Count Dankula on Comedy and Censorship',by:'Andrew Gold',                   tags:['politics','philosophy'],url:sp('Heretics Andrew Gold Count Dankula Comedy Censorship')},
+  {show:'This Is History',      title:'The Black Death: The World Unravels',   by:'Dan Jones',                     tags:['history'],            url:sp('This Is History Dan Jones Black Death World Unravels')},
+  {show:'Empire',               title:'The Mughal Empire: Jewel in the Crown', by:'Dalrymple & Anand',             tags:['history','geography'],url:sp('Empire podcast Dalrymple Mughal Empire')},
+  {show:'Lotus Eaters Podcast', title:'The Crisis of Western Values',          by:'Carl Benjamin',                  tags:['politics'],           url:sp('Lotus Eaters Podcast Crisis Western Values')},
+  {show:'History Hit',          title:'Was Napoleon a Hero or Villain?',       by:'Dan Snow',                       tags:['history'],            url:sp('History Hit Dan Snow Napoleon Hero Villain')},
+  {show:'Triggernometry',       title:'Konstantin Kisin: Comedy Under Attack', by:'Kisin & Foster',                 tags:['politics','philosophy'],url:sp('Triggernometry Konstantin Kisin Comedy Under Attack')},
+  /* wk 2 */
+  {show:'The Rest Is History',  title:'Alexander the Great: God or Man?',      by:'Tom Holland & Dominic Sandbrook',tags:['history'],           url:sp('The Rest Is History Alexander the Great God or Man')},
+  {show:'Tucker Carlson Show',  title:'Victor Davis Hanson on the West',       by:'Tucker Carlson',                 tags:['politics','history'], url:sp('Tucker Carlson Show Victor Davis Hanson West')},
+  {show:'We Have Ways',         title:'The Fall of Berlin 1945',               by:'James Holland & Al Murray',      tags:['history','ww2'],      url:sp('We Have Ways Making You Talk Fall of Berlin 1945')},
+  {show:'Modern Wisdom',        title:'Neil Oliver: What History Teaches Us',  by:'Chris Williamson',               tags:['history','learning'], url:sp('Modern Wisdom Neil Oliver What History Teaches')},
+  {show:'Heretics',             title:'Francis Foster on Comedy and Truth',    by:'Andrew Gold',                    tags:['politics','philosophy'],url:sp('Heretics Andrew Gold Francis Foster Comedy Truth')},
+  {show:'This Is History',      title:'Henry V: The Warrior King',             by:'Dan Jones',                      tags:['history'],            url:sp('This Is History Dan Jones Henry V Warrior King')},
+  {show:'Empire',               title:'Napoleon and the French Empire',        by:'Dalrymple & Anand',              tags:['history'],            url:sp('Empire podcast Dalrymple Napoleon French Empire')},
+  {show:'Lotus Eaters Podcast', title:'The State of Western Democracy',        by:'Carl Benjamin',                  tags:['politics'],           url:sp('Lotus Eaters Podcast State Western Democracy')},
+  {show:'History Hit',          title:'The Vikings: Raiders or Traders?',      by:'Dan Snow',                       tags:['history'],            url:sp('History Hit Dan Snow Vikings Raiders Traders')},
+  {show:'Intelligence Squared', title:'Has the West Lost Its Will?',           by:'IQ2 Debates',                    tags:['politics','philosophy'],url:sp('Intelligence Squared West Lost Its Will')},
+  /* wk 3 */
+  {show:'The Rest Is History',  title:'The Rise of Rome',                      by:'Tom Holland & Dominic Sandbrook',tags:['history','rome'],     url:sp('The Rest Is History Rise of Rome')},
+  {show:'Triggernometry',       title:'Jordan Peterson: Order vs Chaos',       by:'Kisin & Foster',                 tags:['philosophy'],          url:sp('Triggernometry Jordan Peterson Order Chaos')},
+  {show:'We Have Ways',         title:'The Battle of the Bulge',               by:'James Holland & Al Murray',      tags:['history','ww2'],      url:sp('We Have Ways Making You Talk Battle of the Bulge')},
+  {show:'Modern Wisdom',        title:'Tom Holland: Why We Are More Christian Than We Think',by:'Chris Williamson',tags:['history','philosophy'],url:sp('Modern Wisdom Tom Holland More Christian Than We Think')},
+  {show:'Heretics',             title:'Winston Marshall on Music and Politics', by:'Andrew Gold',                   tags:['politics'],            url:sp('Heretics Andrew Gold Winston Marshall Music Politics')},
+  {show:'This Is History',      title:'The Wars of the Roses',                 by:'Dan Jones',                      tags:['history'],             url:sp('This Is History Dan Jones Wars of the Roses')},
+  {show:'Empire',               title:'The Ottoman Empire: Rise and Fall',     by:'Dalrymple & Anand',              tags:['history','geography'], url:sp('Empire podcast Dalrymple Ottoman Empire Rise Fall')},
+  {show:'Lotus Eaters Podcast', title:'The Future of Britain',                 by:'Carl Benjamin',                  tags:['politics'],            url:sp('Lotus Eaters Podcast Future of Britain')},
+  {show:'History Hit',          title:'What Happened to the Knights Templar?', by:'Dan Snow',                       tags:['history'],             url:sp('History Hit Dan Snow Knights Templar What Happened')},
+  {show:'Intelligence Squared', title:'Does Religion Make Society Better?',    by:'IQ2 Debates',                    tags:['politics','philosophy'],url:sp('Intelligence Squared Does Religion Make Society Better')}
+];
+
+/* Older Podcasts — 40 items (20/week × 2 weeks) */
+POOL.op = [
+  /* wk 0 */
+  {show:"Dan Carlin's Hardcore History",title:'Blueprint for Armageddon',           by:'Dan Carlin · WWI series',         tags:['history','ww2'],  url:sp('Dan Carlin Hardcore History Blueprint for Armageddon')},
+  {show:"Dan Carlin's Hardcore History",title:'Wrath of the Khans',                 by:'Dan Carlin · Mongol series',      tags:['history'],        url:sp('Dan Carlin Hardcore History Wrath of the Khans')},
+  {show:"Dan Carlin's Hardcore History",title:'Death Throes of the Republic',       by:'Dan Carlin · Roman Republic',     tags:['history','rome'], url:sp('Dan Carlin Hardcore History Death Throes of the Republic')},
+  {show:"Dan Carlin's Hardcore History",title:'Ghosts of the Ostfront',             by:'Dan Carlin · Eastern Front',      tags:['history','ww2'],  url:sp('Dan Carlin Hardcore History Ghosts of the Ostfront')},
+  {show:"Dan Carlin's Hardcore History",title:'The Celtic Holocaust',               by:'Dan Carlin · Caesar in Gaul',     tags:['history','rome'], url:sp('Dan Carlin Hardcore History Celtic Holocaust')},
+  {show:"Dan Carlin's Hardcore History",title:'Supernova in the East',              by:'Dan Carlin · WWII Pacific',       tags:['history','ww2'],  url:sp('Dan Carlin Hardcore History Supernova in the East')},
+  {show:'Revolutions',                  title:'The Russian Revolution',             by:'Mike Duncan',                     tags:['history','politics'],url:sp('Mike Duncan Revolutions Russian Revolution')},
+  {show:'Revolutions',                  title:'The French Revolution',              by:'Mike Duncan',                     tags:['history','politics'],url:sp('Mike Duncan Revolutions French Revolution')},
+  {show:'In Our Time',                  title:'The Battle of Thermopylae',          by:'Melvyn Bragg · BBC Radio 4',      tags:['history','learning'],url:sp('In Our Time BBC Melvyn Bragg Battle of Thermopylae')},
+  {show:'In Our Time',                  title:'Magna Carta',                        by:'Melvyn Bragg · BBC Radio 4',      tags:['history'],        url:sp('In Our Time BBC Melvyn Bragg Magna Carta')},
+  {show:'Philosophize This!',           title:"Plato's Republic",                   by:'Stephen West',                    tags:['philosophy'],     url:sp('Philosophize This Stephen West Plato Republic')},
+  {show:'Philosophize This!',           title:'Friedrich Nietzsche',                by:'Stephen West',                    tags:['philosophy'],     url:sp('Philosophize This Stephen West Nietzsche')},
+  {show:'The History of Rome',          title:'The Fall of the Republic',           by:'Mike Duncan',                     tags:['history','rome'], url:sp('History of Rome Mike Duncan Fall of the Republic')},
+  {show:'Tides of History',             title:'The Fall of Rome',                   by:'Patrick Wyman',                   tags:['history','rome'], url:sp('Tides of History Patrick Wyman Fall of Rome')},
+  {show:'The History of England',       title:'The Norman Conquest',                by:'David Crowther',                  tags:['history'],        url:sp('History of England David Crowther Norman Conquest')},
+  {show:'Conversations with Tyler',     title:'Jordan Peterson on Meaning',         by:'Tyler Cowen',                     tags:['philosophy','learning'],url:sp('Conversations with Tyler Jordan Peterson Meaning')},
+  {show:'EconTalk',                     title:'Niall Ferguson on Civilisation',     by:'Russ Roberts',                    tags:['history','learning'],url:sp('EconTalk Russ Roberts Niall Ferguson Civilization')},
+  {show:'Cautionary Tales',             title:'Florence Nightingale and the Statistics of War',by:'Tim Harford',         tags:['history','learning'],url:sp('Cautionary Tales Tim Harford Florence Nightingale Statistics')},
+  {show:'The Jordan B. Peterson Podcast',title:'Maps of Meaning: Architecture of Belief',by:'Jordan B. Peterson',       tags:['philosophy'],     url:sp('Jordan Peterson Podcast Maps of Meaning Architecture of Belief')},
+  {show:'Making Sense',                 title:'Douglas Murray: The Strange Death of Europe',by:'Sam Harris',             tags:['politics','philosophy'],url:sp('Making Sense Sam Harris Douglas Murray Strange Death Europe')},
+  /* wk 1 */
+  {show:"Dan Carlin's Hardcore History",title:'King of Kings',                      by:'Dan Carlin · Persian Empire',     tags:['history'],        url:sp('Dan Carlin Hardcore History King of Kings')},
+  {show:"Dan Carlin's Hardcore History",title:'Prophesy of Doom',                   by:'Dan Carlin · Early Islam',        tags:['history'],        url:sp('Dan Carlin Hardcore History Prophesy of Doom')},
+  {show:'Revolutions',                  title:'The English Revolution',             by:'Mike Duncan',                     tags:['history','politics'],url:sp('Mike Duncan Revolutions English Revolution')},
+  {show:'Revolutions',                  title:'The American Revolution',            by:'Mike Duncan',                     tags:['history','politics'],url:sp('Mike Duncan Revolutions American Revolution')},
+  {show:'In Our Time',                  title:'The Crusades',                       by:'Melvyn Bragg · BBC Radio 4',      tags:['history'],        url:sp('In Our Time BBC Melvyn Bragg The Crusades')},
+  {show:'In Our Time',                  title:'The Black Death',                    by:'Melvyn Bragg · BBC Radio 4',      tags:['history'],        url:sp('In Our Time BBC Melvyn Bragg The Black Death')},
+  {show:'Philosophize This!',           title:"Aristotle's Ethics",                 by:'Stephen West',                    tags:['philosophy'],     url:sp('Philosophize This Stephen West Aristotle Ethics')},
+  {show:'Philosophize This!',           title:'Immanuel Kant',                      by:'Stephen West',                    tags:['philosophy'],     url:sp('Philosophize This Stephen West Immanuel Kant')},
+  {show:'The History of Rome',          title:'The Punic Wars',                     by:'Mike Duncan',                     tags:['history','rome'], url:sp('History of Rome Mike Duncan Punic Wars')},
+  {show:'Tides of History',             title:'Medieval Trade Routes',              by:'Patrick Wyman',                   tags:['history','geography'],url:sp('Tides of History Patrick Wyman Medieval Trade Routes')},
+  {show:'The History of England',       title:'Alfred the Great',                   by:'David Crowther',                  tags:['history'],        url:sp('History of England David Crowther Alfred the Great')},
+  {show:'Conversations with Tyler',     title:'Douglas Murray on Free Speech',      by:'Tyler Cowen',                     tags:['politics','learning'],url:sp('Conversations with Tyler Douglas Murray Free Speech')},
+  {show:'EconTalk',                     title:'Thomas Sowell on Race and Economics',by:'Russ Roberts',                    tags:['politics','learning'],url:sp('EconTalk Russ Roberts Thomas Sowell Race Economics')},
+  {show:'Cautionary Tales',             title:'The Deadly Invention of Fritz Haber',by:'Tim Harford',                    tags:['history','learning'],url:sp('Cautionary Tales Tim Harford Fritz Haber Invention')},
+  {show:'The Jordan B. Peterson Podcast',title:'12 Rules for Life: A Deep Dive',   by:'Jordan B. Peterson',              tags:['philosophy'],     url:sp('Jordan Peterson Podcast 12 Rules for Life Deep Dive')},
+  {show:'Making Sense',                 title:'The Nature of Consciousness',        by:'Sam Harris',                      tags:['philosophy','science'],url:sp('Making Sense Sam Harris Nature of Consciousness')},
+  {show:'Philosophize This!',           title:'The Stoics: Marcus Aurelius',        by:'Stephen West',                    tags:['philosophy'],     url:sp('Philosophize This Stephen West Stoics Marcus Aurelius')},
+  {show:'In Our Time',                  title:'Julius Caesar',                      by:'Melvyn Bragg · BBC Radio 4',      tags:['history','rome'], url:sp('In Our Time BBC Melvyn Bragg Julius Caesar')},
+  {show:'Tides of History',             title:'The Silk Road',                      by:'Patrick Wyman',                   tags:['history','geography'],url:sp('Tides of History Patrick Wyman Silk Road')},
+  {show:'EconTalk',                     title:'Nassim Taleb on Risk and Uncertainty',by:'Russ Roberts',                  tags:['learning'],       url:sp('EconTalk Russ Roberts Nassim Taleb Risk Uncertainty')}
+];
+
+/* Recent Books — 20 items (5/week × 4 weeks) — all published 2024-2025 */
+POOL.rb = [
+  /* wk 0 */
+  {title:"Don't Let Him In",             author:'Lisa Jewell',     year:'2024', tags:['thriller'],           url:amz("Don't Let Him In Lisa Jewell")},
+  {title:'Henry V',                      author:'Dan Jones',       year:'2024', tags:['history'],            url:amz('Henry V Dan Jones 2024')},
+  {title:'The Eagle and the Hart',       author:'Helen Castor',    year:'2024', tags:['history'],            url:amz('The Eagle and the Hart Helen Castor')},
+  {title:'The Women',                    author:'Kristin Hannah',  year:'2024', tags:['fiction','history'],  url:amz('The Women Kristin Hannah 2024')},
+  {title:'James',                        author:'Percival Everett',year:'2024', tags:['fiction'],            url:amz('James Percival Everett 2024')},
+  /* wk 1 */
+  {title:'The Familiar',                 author:'Leigh Bardugo',   year:'2024', tags:['fiction','history'],  url:amz('The Familiar Leigh Bardugo 2024')},
+  {title:'The Ministry of Time',         author:'Kaliane Bradley', year:'2024', tags:['fiction'],            url:amz('The Ministry of Time Kaliane Bradley')},
+  {title:'All the Colours of the Dark',  author:'Chris Whitaker',  year:'2024', tags:['thriller','mystery'], url:amz('All the Colours of the Dark Chris Whitaker')},
+  {title:'The Boyfriend',                author:'Freida McFadden', year:'2024', tags:['thriller'],           url:amz('The Boyfriend Freida McFadden 2024')},
+  {title:'The Life Impossible',          author:'Matt Haig',       year:'2024', tags:['fiction'],            url:amz('The Life Impossible Matt Haig 2024')},
+  /* wk 2 */
+  {title:'The God of the Woods',         author:'Lauren Fox',      year:'2024', tags:['thriller','mystery'], url:amz('The God of the Woods Lauren Fox 2024')},
+  {title:'Wind and Truth',               author:'Brandon Sanderson',year:'2024',tags:['fiction'],            url:amz('Wind and Truth Brandon Sanderson')},
+  {title:'The Grey Wolf',                author:'Andrew Wilson',   year:'2024', tags:['thriller'],           url:amz('The Grey Wolf Andrew Wilson 2024')},
+  {title:'Intermezzo',                   author:'Sally Rooney',    year:'2024', tags:['fiction'],            url:amz('Intermezzo Sally Rooney')},
+  {title:'The Safekeep',                 author:'Yael van der Wouden',year:'2024',tags:['fiction','history'],url:amz('The Safekeep Yael van der Wouden')},
+  /* wk 3 */
+  {title:'On the Origin of Time',        author:'Thomas Hertog',   year:'2023', tags:['science','learning'], url:amz('On the Origin of Time Thomas Hertog')},
+  {title:'The Battle of Britain',        author:'James Holland',   year:'2023', tags:['history','ww2'],      url:amz('The Battle of Britain James Holland 2023')},
+  {title:'Manhunt',                      author:'James L. Swanson',year:'2023', tags:['history','thriller'], url:amz('Manhunt James Swanson 2023')},
+  {title:'A Haunting on the Hill',       author:'Holly Black',     year:'2023', tags:['fiction','mystery'],  url:amz('A Haunting on the Hill Holly Black')},
+  {title:'The House in the Pines',       author:'Ana Reyes',       year:'2023', tags:['thriller','mystery'], url:amz('The House in the Pines Ana Reyes')}
+];
+
+/* Older Books — 40 items (10/week × 4 weeks) */
+POOL.ob = [
+  /* wk 0 */
+  {title:'Sapiens',                      author:'Yuval Noah Harari',year:'2011',tags:['history','learning'],  url:amz('Sapiens Yuval Noah Harari')},
+  {title:'Caesar: Life of a Colossus',   author:'Adrian Goldsworthy',year:'2006',tags:['history','rome'],    url:amz('Caesar Life of a Colossus Adrian Goldsworthy')},
+  {title:'Persian Fire',                 author:'Tom Holland',      year:'2005',tags:['history'],             url:amz('Persian Fire Tom Holland')},
+  {title:'The Last Kingdom',             author:'Bernard Cornwell', year:'2004',tags:['fiction','history'],   url:amz('The Last Kingdom Bernard Cornwell')},
+  {title:'The Splendid and the Vile',    author:'Erik Larson',      year:'2020',tags:['history','ww2'],       url:amz('The Splendid and the Vile Erik Larson')},
+  {title:'Genghis Khan and the Making of the Modern World',author:'Jack Weatherford',year:'2004',tags:['history'],url:amz('Genghis Khan Making Modern World Jack Weatherford')},
+  {title:'The Pillars of the Earth',     author:'Ken Follett',      year:'1989',tags:['fiction','history'],   url:amz('The Pillars of the Earth Ken Follett')},
+  {title:'The Storm Before the Storm',   author:'Mike Duncan',      year:'2017',tags:['history','rome'],      url:amz('The Storm Before the Storm Mike Duncan')},
+  {title:'The Romanovs: 1613–1918',      author:'Simon Sebag Montefiore',year:'2016',tags:['history'],       url:amz('The Romanovs Simon Sebag Montefiore')},
+  {title:'All Quiet on the Western Front',author:'Erich Maria Remarque',year:'1929',tags:['fiction','ww2'],  url:amz('All Quiet on the Western Front Remarque')},
+  /* wk 1 */
+  {title:'Wolf Hall',                    author:'Hilary Mantel',    year:'2009',tags:['fiction','history'],   url:amz('Wolf Hall Hilary Mantel')},
+  {title:'The Name of the Rose',         author:'Umberto Eco',      year:'1980',tags:['fiction','mystery'],   url:amz('The Name of the Rose Umberto Eco')},
+  {title:'In Cold Blood',                author:'Truman Capote',    year:'1966',tags:['thriller','mystery'],  url:amz('In Cold Blood Truman Capote')},
+  {title:'A Distant Mirror',             author:'Barbara Tuchman',  year:'1978',tags:['history'],             url:amz('A Distant Mirror Barbara Tuchman')},
+  {title:'The Guns of August',           author:'Barbara Tuchman',  year:'1962',tags:['history','ww2'],       url:amz('The Guns of August Barbara Tuchman')},
+  {title:'The Lost City of Z',           author:'David Grann',      year:'2009',tags:['history','geography'], url:amz('The Lost City of Z David Grann')},
+  {title:'Lawrence in Arabia',           author:'Scott Anderson',   year:'2013',tags:['history'],             url:amz('Lawrence in Arabia Scott Anderson')},
+  {title:'Longitude',                    author:'Dava Sobel',       year:'1995',tags:['history','learning'],  url:amz('Longitude Dava Sobel')},
+  {title:'The Terror',                   author:'Dan Simmons',      year:'2007',tags:['fiction','history'],   url:amz('The Terror Dan Simmons')},
+  {title:'Stalingrad',                   author:'Antony Beevor',    year:'1998',tags:['history','ww2'],       url:amz('Stalingrad Antony Beevor')},
+  /* wk 2 */
+  {title:'The Plantagenets',             author:'Dan Jones',        year:'2012',tags:['history'],             url:amz('The Plantagenets Dan Jones')},
+  {title:'The Conquerors',               author:'Roger Crowley',    year:'2005',tags:['history'],             url:amz('The Conquerors Roger Crowley')},
+  {title:'D-Day',                        author:'Antony Beevor',    year:'2009',tags:['history','ww2'],       url:amz('D-Day Antony Beevor')},
+  {title:'The Prince',                   author:'Niccolò Machiavelli',year:'1532',tags:['philosophy','politics'],url:amz('The Prince Machiavelli')},
+  {title:'Crime and Punishment',         author:'Fyodor Dostoevsky',year:'1866',tags:['fiction','mystery'],   url:amz('Crime and Punishment Dostoevsky')},
+  {title:'Catch-22',                     author:'Joseph Heller',    year:'1961',tags:['fiction','ww2'],       url:amz('Catch-22 Joseph Heller')},
+  {title:'The Professor and the Madman', author:'Simon Winchester', year:'1998',tags:['history','learning'],  url:amz('The Professor and the Madman Simon Winchester')},
+  {title:'Pacific',                      author:'Simon Winchester', year:'2015',tags:['history','geography'], url:amz('Pacific Simon Winchester')},
+  {title:'Gates of Fire',                author:'Steven Pressfield',year:'1998',tags:['fiction','history'],   url:amz('Gates of Fire Steven Pressfield')},
+  {title:'The Anabasis of Alexander',    author:'Arrian',           year:'c.150',tags:['history','rome'],    url:amz('Anabasis of Alexander Arrian')},
+  /* wk 3 */
+  {title:'Destined for War',             author:'Graham Allison',   year:'2017',tags:['history','politics'],  url:amz('Destined for War Graham Allison')},
+  {title:'The Peloponnesian War',        author:'Donald Kagan',     year:'2003',tags:['history'],             url:amz('The Peloponnesian War Donald Kagan')},
+  {title:'Alexander of Macedon',        author:'Peter Green',      year:'1991',tags:['history'],             url:amz('Alexander of Macedon Peter Green')},
+  {title:'The Fate of Rome',             author:'Kyle Harper',      year:'2017',tags:['history','rome'],      url:amz('The Fate of Rome Kyle Harper')},
+  {title:'The Autobiography of Henry VIII',author:'Margaret George',year:'1986',tags:['fiction','history'],  url:amz('The Autobiography of Henry VIII Margaret George')},
+  {title:'The Last Stand of the Tin Can Sailors',author:'James Hornfischer',year:'2004',tags:['history','ww2'],url:amz('Last Stand Tin Can Sailors Hornfischer')},
+  {title:'With the Old Breed',           author:'Eugene Sledge',    year:'1981',tags:['history','ww2'],       url:amz('With the Old Breed Eugene Sledge')},
+  {title:'The Spy Who Came in from the Cold',author:"John le Carré",year:'1963',tags:['fiction','thriller'],  url:amz('The Spy Who Came in from the Cold le Carre')},
+  {title:'The Book Thief',               author:'Markus Zusak',     year:'2005',tags:['fiction','ww2'],       url:amz('The Book Thief Markus Zusak')},
+  {title:'Imperium',                     author:'Robert Harris',    year:'2006',tags:['fiction','rome'],      url:amz('Imperium Robert Harris')}
+];
+
+/* Articles — 40 items (20/week × 2 weeks) — specific articles, linked via search */
+POOL.ar = [
+  /* wk 0 */
+  {source:'HistoryExtra',       title:'Why Did the Roman Empire Fall?',                        tags:['history','rome'],      url:art('Why Did the Roman Empire Fall?','HistoryExtra')},
+  {source:'Smithsonian',        title:'The Real Genghis Khan',                                 tags:['history'],             url:art('The Real Genghis Khan','Smithsonian Magazine')},
+  {source:'Quanta Magazine',    title:'What Is Time? A Simple Explanation',                    tags:['science','learning'],  url:art('What Is Time A Simple Explanation','Quanta Magazine')},
+  {source:'Aeon',               title:'The Stoic Guide to Facing Death',                       tags:['philosophy'],          url:art('The Stoic Guide to Facing Death','Aeon')},
+  {source:'The Spectator',      title:'The Slow Decline of the English Church',                tags:['politics'],            url:art('The Slow Decline of the English Church','The Spectator')},
+  {source:'UnHerd',             title:'The Case for National Identity',                        tags:['politics','philosophy'],url:art('The Case for National Identity','UnHerd')},
+  {source:'The Free Press',     title:'The Death of Free Speech on Campus',                    tags:['politics'],            url:art('The Death of Free Speech on Campus','The Free Press')},
+  {source:'BBC Future',         title:'The Science of Sleep: What Actually Happens',           tags:['science','learning'],  url:art('The Science of Sleep What Actually Happens','BBC Future')},
+  {source:'Hoover Institution', title:'The Origins of Western Civilisation',                   tags:['history','politics'],  url:art('The Origins of Western Civilisation','Hoover Institution')},
+  {source:'Big Think',          title:'The Psychology of Moral Confusion',                     tags:['philosophy','learning'],url:art('The Psychology of Moral Confusion','Big Think')},
+  {source:'Engelsberg Ideas',   title:'The Collapse of the Western Roman Empire',              tags:['history','rome'],      url:art('The Collapse of the Western Roman Empire','Engelsberg Ideas')},
+  {source:'National Geographic',title:'The Lost City of Petra: Secrets of the Rose-Red City', tags:['geography','history'], url:art('The Lost City of Petra Secrets of the Rose-Red City','National Geographic')},
+  {source:'Atlas Obscura',      title:'The Secret Tunnels Beneath the Vatican',                tags:['history','geography'], url:art('The Secret Tunnels Beneath the Vatican','Atlas Obscura')},
+  {source:'BBC Future',         title:'How the Ancient Romans Kept Their Cities Clean',        tags:['history','rome'],      url:art('How the Ancient Romans Kept Their Cities Clean','BBC Future')},
+  {source:'The Critic',         title:'Why Britain Punches Above Its Weight in History',       tags:['history','politics'],  url:art('Why Britain Punches Above Its Weight in History','The Critic')},
+  {source:'The Daily Signal',   title:'What Ronald Reagan Can Teach Us About Leadership',      tags:['politics'],            url:art('What Ronald Reagan Can Teach Us About Leadership','The Daily Signal')},
+  {source:'Persuasion',         title:'In Defence of the Nation State',                        tags:['politics','philosophy'],url:art('In Defence of the Nation State','Persuasion')},
+  {source:'Real Clear History', title:'The Battle That Saved Western Civilisation',            tags:['history'],             url:art('The Battle That Saved Western Civilisation','Real Clear History')},
+  {source:'The Economist · 1843',title:'Life and Death Among Medieval Merchants',             tags:['history','learning'],  url:art('Life and Death Among Medieval Merchants','The Economist 1843')},
+  {source:'Nautilus',           title:'The Mysterious Universe: Why Physicists Can\'t Agree', tags:['science','philosophy'],url:art("The Mysterious Universe Why Physicists Can't Agree",'Nautilus')},
+  /* wk 1 */
+  {source:'HistoryExtra',       title:'What Really Changed After the Norman Conquest?',        tags:['history'],             url:art('What Really Changed After the Norman Conquest','HistoryExtra')},
+  {source:'Smithsonian',        title:'How Attila the Hun Shaped the Course of Europe',        tags:['history'],             url:art('How Attila the Hun Shaped the Course of Europe','Smithsonian Magazine')},
+  {source:'Quanta Magazine',    title:'The Many Meanings of Einstein\'s E=mc²',                tags:['science'],             url:art("The Many Meanings of Einstein's E=mc2",'Quanta Magazine')},
+  {source:'Aeon',               title:'Can Philosophy Save Us from Technology?',               tags:['philosophy','learning'],url:art('Can Philosophy Save Us from Technology','Aeon')},
+  {source:'The Spectator',      title:'What Has Gone Wrong with British Education?',           tags:['politics'],            url:art('What Has Gone Wrong with British Education','The Spectator')},
+  {source:'UnHerd',             title:'The New Puritanism and Its Discontents',                tags:['politics','philosophy'],url:art('The New Puritanism and Its Discontents','UnHerd')},
+  {source:'The Free Press',     title:'What Happened to the American Dream?',                  tags:['politics'],            url:art('What Happened to the American Dream','The Free Press')},
+  {source:'BBC Future',         title:'The Extraordinary Resilience of the Human Body',        tags:['science','learning'],  url:art('The Extraordinary Resilience of the Human Body','BBC Future')},
+  {source:'Hoover Institution', title:'Victor Davis Hanson: Why Democracies Die',              tags:['politics','history'],  url:art('Victor Davis Hanson Why Democracies Die','Hoover Institution')},
+  {source:'Big Think',          title:'The Science of Decision-Making Under Pressure',         tags:['science','learning'],  url:art('The Science of Decision-Making Under Pressure','Big Think')},
+  {source:'Engelsberg Ideas',   title:'How the Crusades Changed Christianity Forever',         tags:['history'],             url:art('How the Crusades Changed Christianity Forever','Engelsberg Ideas')},
+  {source:'National Geographic',title:"The World's Most Dangerous Borders",                   tags:['geography','politics'],url:art("The World's Most Dangerous Borders",'National Geographic')},
+  {source:'Atlas Obscura',      title:'The Abandoned Underground City Beneath Turkey',         tags:['geography','history'], url:art('The Abandoned Underground City Beneath Turkey','Atlas Obscura')},
+  {source:'BBC Future',         title:'The Dark Art of Roman Gladiatorial Combat',             tags:['history','rome'],      url:art('The Dark Art of Roman Gladiatorial Combat','BBC Future')},
+  {source:'The Critic',         title:"Britain's Lost Empire: What Really Happened?",          tags:['history','politics'],  url:art("Britain's Lost Empire What Really Happened",'The Critic')},
+  {source:'The Daily Signal',   title:"The Left's Long March Through the Institutions",        tags:['politics'],            url:art("The Left's Long March Through the Institutions",'The Daily Signal')},
+  {source:'Persuasion',         title:'Why Democracy Needs Dissent',                           tags:['politics','philosophy'],url:art('Why Democracy Needs Dissent','Persuasion')},
+  {source:'Real Clear History', title:'The Ten Most Decisive Battles in History',              tags:['history'],             url:art('The Ten Most Decisive Battles in History','Real Clear History')},
+  {source:'The Economist · 1843',title:'Life in the Trenches: The True Story of WWI',          tags:['history','ww2'],       url:art('Life in the Trenches The True Story of WWI','The Economist 1843')},
+  {source:'Nautilus',           title:'The Mind-Body Problem: 2,500 Years On',                 tags:['philosophy','science'],url:art('The Mind-Body Problem 2500 Years On','Nautilus')}
+];
+
+/* ── Tab config ──────────────────────────────────── */
+var TABS = {
+  rp:{label:'Recent Podcasts', pool:POOL.rp, per:10, type:'podcast', openLabel:'Listen on Spotify', icon:ICON_SP},
+  op:{label:'Older Podcasts',  pool:POOL.op, per:20, type:'podcast', openLabel:'Listen on Spotify', icon:ICON_SP},
+  rb:{label:'Recent Books',    pool:POOL.rb, per:5,  type:'book',    openLabel:'View on Amazon',    icon:ICON_AMZ},
+  ob:{label:'Older Books',     pool:POOL.ob, per:10, type:'book',    openLabel:'View on Amazon',    icon:ICON_AMZ},
+  ar:{label:'Weekly Articles', pool:POOL.ar, per:20, type:'article', openLabel:'Read article',      icon:ICON_LNK}
+};
+
+/* ── Week calculation ────────────────────────────── */
+var REF_MS = new Date('2026-05-19T00:00:00').getTime();
+function getWeekIndex(){
+  return Math.max(0, Math.floor((Date.now() - REF_MS) / (7*24*3600*1000)));
+}
+function weekLabel(idx){
+  var d = new Date(REF_MS + idx*7*24*3600*1000);
+  var mn=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return 'Week of '+d.getDate()+' '+mn[d.getMonth()]+' '+d.getFullYear();
+}
+
+/* ── Slice pool for week ─────────────────────────── */
+function weekItems(pool, per, weekIdx){
+  var offset = (weekIdx * per) % pool.length;
+  var out = [];
+  for(var i=0;i<per;i++) out.push(pool[(offset+i)%pool.length]);
+  return out;
+}
+
+/* ── Archive (localStorage) ──────────────────────── */
+var ARC_KEY  = 'bp:arc:v1';
+var LAST_KEY = 'bp:lastWeek:v1';
+
+function loadArchive(){
+  try{return JSON.parse(localStorage.getItem(ARC_KEY)||'[]');}catch(e){return [];}
+}
+function saveArchive(a){
+  try{localStorage.setItem(ARC_KEY,JSON.stringify(a));}catch(e){}
+}
+
+function runArchive(currentWeek){
+  var last = parseInt(localStorage.getItem(LAST_KEY)||'-1',10);
+  if(currentWeek <= last) return;
+  var arc = loadArchive();
+  /* archive every completed week between last and now */
+  for(var w=Math.max(last,0); w<currentWeek; w++){
+    if(!arc.find(function(a){return a.w===w;})){
+      var entry = {w:w, label:weekLabel(w), saved:new Date().toISOString(), data:{}};
+      Object.keys(TABS).forEach(function(k){
+        var t=TABS[k];
+        entry.data[k]={label:t.label, items:weekItems(t.pool,t.per,w)};
+      });
+      arc.push(entry);
+    }
+  }
+  /* keep last 16 weeks */
+  if(arc.length>16) arc=arc.slice(arc.length-16);
+  saveArchive(arc);
+  localStorage.setItem(LAST_KEY,currentWeek.toString());
+}
+
+/* ── Helpers ─────────────────────────────────────── */
+function esc(s){
+  return String(s==null?'':s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+/* ── Build card element ──────────────────────────── */
+function buildCard(item, tabKey){
+  var t = TABS[tabKey];
+  var a = document.createElement('a');
+  a.className='card '+t.type;
+  a.href=item.url; a.target='_blank'; a.rel='noopener noreferrer';
+
+  var html='';
+  if(t.type==='podcast'){
+    html+='<div class="show-lbl">'+esc(item.show)+'</div>';
+    html+='<div class="c-title">'+esc(item.title)+'</div>';
+    html+='<div class="c-sub">'+esc(item.by)+'</div>';
+  } else if(t.type==='book'){
+    html+='<div class="show-lbl">'+esc(item.year)+'</div>';
+    html+='<div class="c-title">'+esc(item.title)+'</div>';
+    html+='<div class="c-sub">'+esc(item.author)+'</div>';
+  } else {
+    html+='<div class="show-lbl">'+esc(item.source)+'</div>';
+    html+='<div class="c-title">'+esc(item.title)+'</div>';
+  }
+  var tagHtml=(item.tags||[]).map(function(t){
+    return '<span class="tag '+esc(t)+'">'+esc(t)+'</span>';
+  }).join('');
+  html+='<div class="tags">'+tagHtml+'</div>';
+  html+='<div class="open-ln">'+t.icon+' '+esc(t.openLabel)+' ↗</div>';
+  a.innerHTML=html;
+  return a;
+}
+
+/* ── Render grid ─────────────────────────────────── */
+var activeTab='rp';
+var currentWeek=0;
+
+function renderGrid(tabKey, query){
+  var t=TABS[tabKey];
+  var items=weekItems(t.pool, t.per, currentWeek);
+  var q=(query||'').toLowerCase().trim();
+  if(q){
+    items=items.filter(function(item){
+      return [item.show,item.title,item.by,item.author,item.source,
+              item.year,(item.tags||[]).join(' ')].join(' ').toLowerCase().indexOf(q)!==-1;
+    });
+  }
+  var grid=document.getElementById('grid');
+  grid.innerHTML='';
+  if(!items.length){
+    var em=document.createElement('div');
+    em.className='empty';
+    em.textContent='No matches for "'+query+'"';
+    grid.appendChild(em);
+    return;
+  }
+  items.forEach(function(item){grid.appendChild(buildCard(item,tabKey));});
+}
+
+function switchTab(key){
+  activeTab=key;
+  document.querySelectorAll('.tab').forEach(function(b){
+    b.classList.toggle('active',b.dataset.tab===key);
+  });
+  document.getElementById('section-title').textContent=TABS[key].label;
+  renderGrid(key,document.getElementById('search-input').value);
+}
+
+/* ── Archive panel ───────────────────────────────── */
+function renderArchive(){
+  var arc=loadArchive().slice().reverse(); /* newest first */
+  var body=document.getElementById('arc-body');
+  body.innerHTML='';
+  if(!arc.length){
+    body.innerHTML='<div class="arc-empty">No archived weeks yet.<br>Check back after the first week has passed.</div>';
+    return;
+  }
+  arc.forEach(function(entry){
+    var wDiv=document.createElement('div');
+    wDiv.className='arc-week';
+    var lbl=document.createElement('div');
+    lbl.className='arc-week-label'; lbl.textContent=entry.label;
+    wDiv.appendChild(lbl);
+    Object.keys(entry.data).forEach(function(k){
+      var sec=entry.data[k];
+      var sDiv=document.createElement('div'); sDiv.className='arc-section';
+      var st=document.createElement('div'); st.className='arc-section-title';
+      st.textContent=sec.label; sDiv.appendChild(st);
+      var list=document.createElement('div'); list.className='arc-list';
+      sec.items.forEach(function(item){
+        var row=document.createElement('div'); row.className='arc-item';
+        var meta=document.createElement('span'); meta.className='arc-meta';
+        meta.textContent=(item.show||item.author||item.source||'')+'  ';
+        var link=document.createElement('a');
+        link.href=item.url; link.target='_blank'; link.rel='noopener noreferrer';
+        link.textContent=item.title||item.source||'';
+        row.appendChild(meta); row.appendChild(link);
+        list.appendChild(row);
+      });
+      sDiv.appendChild(list); wDiv.appendChild(sDiv);
+    });
+    body.appendChild(wDiv);
+  });
+}
+
+/* ── Events ──────────────────────────────────────── */
+document.getElementById('tabs').addEventListener('click',function(e){
+  var b=e.target.closest('.tab');
+  if(b&&b.dataset.tab) switchTab(b.dataset.tab);
+});
+document.getElementById('search-input').addEventListener('input',function(){
+  renderGrid(activeTab,this.value);
+});
+document.getElementById('clear-btn').addEventListener('click',function(){
+  var inp=document.getElementById('search-input');
+  inp.value=''; inp.focus(); renderGrid(activeTab,'');
+});
+document.getElementById('open-arc').addEventListener('click',function(){
+  renderArchive();
+  document.getElementById('overlay').classList.add('open');
+});
+document.getElementById('close-arc').addEventListener('click',function(){
+  document.getElementById('overlay').classList.remove('open');
+});
+document.getElementById('overlay').addEventListener('click',function(e){
+  if(e.target===this) this.classList.remove('open');
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape') document.getElementById('overlay').classList.remove('open');
+});
+
+/* ── Init ────────────────────────────────────────── */
+currentWeek=getWeekIndex();
+runArchive(currentWeek);
+document.getElementById('week-label').textContent=weekLabel(currentWeek);
+switchTab('rp');
+
+})();
+</script>
+</body>
+</html>
