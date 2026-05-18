@@ -368,9 +368,6 @@ var ICON_LNK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok
 /* ── URL builders ────────────────────────────────── */
 function sp(q){return 'https://open.spotify.com/search/'+encodeURIComponent(q);}
 function amz(q){return 'https://www.amazon.co.uk/s?k='+encodeURIComponent(q)+'&i=stripbooks';}
-function art(title,source){
-  return 'https://www.google.com/search?q='+encodeURIComponent('"'+title+'" '+source);
-}
 
 /* ── Data pools ──────────────────────────────────── */
 /* Each category has enough entries for ≥4 non-repeating weeks.
@@ -548,50 +545,50 @@ POOL.ob = [
   {title:'Imperium',                     author:'Robert Harris',    year:'2006',tags:['fiction','rome'],      url:amz('Imperium Robert Harris')}
 ];
 
-/* Articles — 40 items (20/week × 2 weeks) — specific articles, linked via search */
+/* Articles — 40 items (20/week × 2 weeks) — direct article links */
 POOL.ar = [
   /* wk 0 */
-  {source:'HistoryExtra',       title:'Why Did the Roman Empire Fall?',                        tags:['history','rome'],      url:art('Why Did the Roman Empire Fall?','HistoryExtra')},
-  {source:'Smithsonian',        title:'The Real Genghis Khan',                                 tags:['history'],             url:art('The Real Genghis Khan','Smithsonian Magazine')},
-  {source:'Quanta Magazine',    title:'What Is Time? A Simple Explanation',                    tags:['science','learning'],  url:art('What Is Time A Simple Explanation','Quanta Magazine')},
-  {source:'Aeon',               title:'The Stoic Guide to Facing Death',                       tags:['philosophy'],          url:art('The Stoic Guide to Facing Death','Aeon')},
-  {source:'The Spectator',      title:'The Slow Decline of the English Church',                tags:['politics'],            url:art('The Slow Decline of the English Church','The Spectator')},
-  {source:'UnHerd',             title:'The Case for National Identity',                        tags:['politics','philosophy'],url:art('The Case for National Identity','UnHerd')},
-  {source:'The Free Press',     title:'The Death of Free Speech on Campus',                    tags:['politics'],            url:art('The Death of Free Speech on Campus','The Free Press')},
-  {source:'BBC Future',         title:'The Science of Sleep: What Actually Happens',           tags:['science','learning'],  url:art('The Science of Sleep What Actually Happens','BBC Future')},
-  {source:'Hoover Institution', title:'The Origins of Western Civilisation',                   tags:['history','politics'],  url:art('The Origins of Western Civilisation','Hoover Institution')},
-  {source:'Big Think',          title:'The Psychology of Moral Confusion',                     tags:['philosophy','learning'],url:art('The Psychology of Moral Confusion','Big Think')},
-  {source:'Engelsberg Ideas',   title:'The Collapse of the Western Roman Empire',              tags:['history','rome'],      url:art('The Collapse of the Western Roman Empire','Engelsberg Ideas')},
-  {source:'National Geographic',title:'The Lost City of Petra: Secrets of the Rose-Red City', tags:['geography','history'], url:art('The Lost City of Petra Secrets of the Rose-Red City','National Geographic')},
-  {source:'Atlas Obscura',      title:'The Secret Tunnels Beneath the Vatican',                tags:['history','geography'], url:art('The Secret Tunnels Beneath the Vatican','Atlas Obscura')},
-  {source:'BBC Future',         title:'How the Ancient Romans Kept Their Cities Clean',        tags:['history','rome'],      url:art('How the Ancient Romans Kept Their Cities Clean','BBC Future')},
-  {source:'The Critic',         title:'Why Britain Punches Above Its Weight in History',       tags:['history','politics'],  url:art('Why Britain Punches Above Its Weight in History','The Critic')},
-  {source:'The Daily Signal',   title:'What Ronald Reagan Can Teach Us About Leadership',      tags:['politics'],            url:art('What Ronald Reagan Can Teach Us About Leadership','The Daily Signal')},
-  {source:'Persuasion',         title:'In Defence of the Nation State',                        tags:['politics','philosophy'],url:art('In Defence of the Nation State','Persuasion')},
-  {source:'Real Clear History', title:'The Battle That Saved Western Civilisation',            tags:['history'],             url:art('The Battle That Saved Western Civilisation','Real Clear History')},
-  {source:'The Economist · 1843',title:'Life and Death Among Medieval Merchants',             tags:['history','learning'],  url:art('Life and Death Among Medieval Merchants','The Economist 1843')},
-  {source:'Nautilus',           title:'The Mysterious Universe: Why Physicists Can\'t Agree', tags:['science','philosophy'],url:art("The Mysterious Universe Why Physicists Can't Agree",'Nautilus')},
+  {source:'Smithsonian',        title:'How Climate Change and Plague Helped Bring Down the Roman Empire',        tags:['history','rome'],       url:'https://www.smithsonianmag.com/science-nature/how-climate-change-and-disease-helped-fall-rome-180967591/'},
+  {source:'Smithsonian',        title:'Ten Ancient Stories and the Geological Events That Inspired Them',        tags:['history','learning'],   url:'https://www.smithsonianmag.com/science-nature/ten-ancient-stories-and-geological-events-may-have-inspired-them-180950347/'},
+  {source:'Quanta Magazine',    title:'The Mystery at the Heart of Physics That Only Math Can Solve',            tags:['science','learning'],   url:'https://www.quantamagazine.org/the-mystery-at-the-heart-of-physics-that-only-math-can-solve-20210610/'},
+  {source:'Aeon',               title:'History and Philosophy Should Make Us Feel Baffled and Strange',          tags:['philosophy','history'], url:'https://aeon.co/essays/history-and-philosophy-should-make-us-feel-baffled-and-strange'},
+  {source:'The Spectator',      title:'The Tragic Decline of Political Rhetoric',                                tags:['politics'],             url:'https://www.spectator.co.uk/article/the-tragic-decline-of-political-rhetoric/'},
+  {source:'UnHerd',             title:'America\'s Philosophical Civil War',                                      tags:['politics','philosophy'],url:'https://unherd.com/2025/06/americas-philosophical-civil-war/'},
+  {source:'The Free Press',     title:'Goodbye to the Age of the Book',                                          tags:['politics','learning'],  url:'https://www.thefp.com/p/goodbye-to-the-age-of-the-book'},
+  {source:'Aeon',               title:'Do Not Weep for Your Dead: How to Mourn as the Stoics Did',               tags:['philosophy'],           url:'https://aeon.co/essays/do-not-weep-for-your-dead-how-to-mourn-as-the-stoics-did'},
+  {source:'Hoover Institution', title:'The Folly of Forgetting the West',                                        tags:['history','politics'],   url:'https://www.hoover.org/research/folly-forgetting-west'},
+  {source:'Big Think',          title:'3 Philosophical Questions That Neuroscience Is Reframing',                tags:['philosophy','learning'],url:'https://bigthink.com/thinking/3-philosophical-questions-of-the-20th-century-that-neuroscience-is-reframing/'},
+  {source:'Engelsberg Ideas',   title:'The Vitality of Western Civilisation',                                    tags:['history','politics'],   url:'https://engelsbergideas.com/essays/the-vitality-of-western-civilisation/'},
+  {source:'National Geographic',title:'Ancient Rome\'s Remarkable Bridges and Buildings',                        tags:['history','rome'],       url:'https://www.nationalgeographic.com/history/article/ancient-roman-empire-bridges-buildings'},
+  {source:'Atlas Obscura',      title:'Ruins Worth the Trip',                                                    tags:['geography','history'],  url:'https://www.atlasobscura.com/articles/ruins-worth-the-trip'},
+  {source:'Engelsberg Ideas',   title:'Did Civilisation Add to the Quality of Human Life?',                      tags:['history','philosophy'], url:'https://engelsbergideas.com/essays/did-civilisation-add-to-the-quality-of-human-life/'},
+  {source:'The Critic',         title:'The Matter of Britain',                                                   tags:['history','politics'],   url:'https://thecritic.co.uk/the-matter-of-britain/'},
+  {source:'The Daily Signal',   title:'Academia Failed to Pass on the Western Tradition',                        tags:['politics','history'],   url:'https://www.dailysignal.com/2025/11/23/academia-failed-to-pass-on-the-western-tradition-but-theres-hope-for-keeping-history-alive/'},
+  {source:'Persuasion',         title:'The Democratic Duty',                                                     tags:['politics','philosophy'],url:'https://www.persuasion.community/p/the-democratic-duty'},
+  {source:'Nautilus',           title:'Consciousness Began When the Gods Stopped Speaking',                      tags:['science','philosophy'], url:'https://nautil.us/consciousness-began-when-the-gods-stopped-speaking-235445'},
+  {source:'Quanta Magazine',    title:'Srinivasa Ramanujan Was a Genius. Math Is Still Catching Up.',            tags:['science','learning'],   url:'https://www.quantamagazine.org/srinivasa-ramanujan-was-a-genius-math-is-still-catching-up-20241021/'},
+  {source:'Nautilus',           title:'Is Matter Conscious?',                                                    tags:['philosophy','science'], url:'https://nautil.us/is-matter-conscious-236546'},
   /* wk 1 */
-  {source:'HistoryExtra',       title:'What Really Changed After the Norman Conquest?',        tags:['history'],             url:art('What Really Changed After the Norman Conquest','HistoryExtra')},
-  {source:'Smithsonian',        title:'How Attila the Hun Shaped the Course of Europe',        tags:['history'],             url:art('How Attila the Hun Shaped the Course of Europe','Smithsonian Magazine')},
-  {source:'Quanta Magazine',    title:'The Many Meanings of Einstein\'s E=mc²',                tags:['science'],             url:art("The Many Meanings of Einstein's E=mc2",'Quanta Magazine')},
-  {source:'Aeon',               title:'Can Philosophy Save Us from Technology?',               tags:['philosophy','learning'],url:art('Can Philosophy Save Us from Technology','Aeon')},
-  {source:'The Spectator',      title:'What Has Gone Wrong with British Education?',           tags:['politics'],            url:art('What Has Gone Wrong with British Education','The Spectator')},
-  {source:'UnHerd',             title:'The New Puritanism and Its Discontents',                tags:['politics','philosophy'],url:art('The New Puritanism and Its Discontents','UnHerd')},
-  {source:'The Free Press',     title:'What Happened to the American Dream?',                  tags:['politics'],            url:art('What Happened to the American Dream','The Free Press')},
-  {source:'BBC Future',         title:'The Extraordinary Resilience of the Human Body',        tags:['science','learning'],  url:art('The Extraordinary Resilience of the Human Body','BBC Future')},
-  {source:'Hoover Institution', title:'Victor Davis Hanson: Why Democracies Die',              tags:['politics','history'],  url:art('Victor Davis Hanson Why Democracies Die','Hoover Institution')},
-  {source:'Big Think',          title:'The Science of Decision-Making Under Pressure',         tags:['science','learning'],  url:art('The Science of Decision-Making Under Pressure','Big Think')},
-  {source:'Engelsberg Ideas',   title:'How the Crusades Changed Christianity Forever',         tags:['history'],             url:art('How the Crusades Changed Christianity Forever','Engelsberg Ideas')},
-  {source:'National Geographic',title:"The World's Most Dangerous Borders",                   tags:['geography','politics'],url:art("The World's Most Dangerous Borders",'National Geographic')},
-  {source:'Atlas Obscura',      title:'The Abandoned Underground City Beneath Turkey',         tags:['geography','history'], url:art('The Abandoned Underground City Beneath Turkey','Atlas Obscura')},
-  {source:'BBC Future',         title:'The Dark Art of Roman Gladiatorial Combat',             tags:['history','rome'],      url:art('The Dark Art of Roman Gladiatorial Combat','BBC Future')},
-  {source:'The Critic',         title:"Britain's Lost Empire: What Really Happened?",          tags:['history','politics'],  url:art("Britain's Lost Empire What Really Happened",'The Critic')},
-  {source:'The Daily Signal',   title:"The Left's Long March Through the Institutions",        tags:['politics'],            url:art("The Left's Long March Through the Institutions",'The Daily Signal')},
-  {source:'Persuasion',         title:'Why Democracy Needs Dissent',                           tags:['politics','philosophy'],url:art('Why Democracy Needs Dissent','Persuasion')},
-  {source:'Real Clear History', title:'The Ten Most Decisive Battles in History',              tags:['history'],             url:art('The Ten Most Decisive Battles in History','Real Clear History')},
-  {source:'The Economist · 1843',title:'Life in the Trenches: The True Story of WWI',          tags:['history','ww2'],       url:art('Life in the Trenches The True Story of WWI','The Economist 1843')},
-  {source:'Nautilus',           title:'The Mind-Body Problem: 2,500 Years On',                 tags:['philosophy','science'],url:art('The Mind-Body Problem 2500 Years On','Nautilus')}
+  {source:'Smithsonian',        title:'Afghanistan: Where Hellenistic Culture Blended with Buddhist Influences', tags:['history','geography'],  url:'https://www.smithsonianmag.com/history/afghanistan-was-a-crossroad-of-the-ancient-world-where-hellenistic-culture-blended-with-buddhist-influences-180988065/'},
+  {source:'Smithsonian',        title:'Lessons in the Decline of Democracy From the Ruined Roman Republic',     tags:['history','politics'],   url:'https://www.smithsonianmag.com/history/lessons-decline-democracy-from-ruined-roman-republic-180970711/'},
+  {source:'Quanta Magazine',    title:'The Biggest Discoveries in Mathematics in 2023',                          tags:['science','learning'],   url:'https://www.quantamagazine.org/the-biggest-discoveries-in-math-in-2023-20231222/'},
+  {source:'Aeon',               title:'How David Hume Split Literature from Philosophy',                         tags:['philosophy','history'], url:'https://aeon.co/essays/how-david-hume-split-literature-from-philosophy'},
+  {source:'The Spectator',      title:'Donald Trump and the New Political Disorder',                             tags:['politics'],             url:'https://www.spectator.co.uk/article/donald-trump-and-new-political-disorder/'},
+  {source:'UnHerd',             title:'The Left Has Forgotten Its Philosophy',                                   tags:['politics','philosophy'],url:'https://unherd.com/2024/11/the-left-has-forgotten-its-philosophy/'},
+  {source:'The Free Press',     title:'Reading Saved Me from the Sins of My Father\'s Culture',                 tags:['politics','learning'],  url:'https://www.thefp.com/p/reading-saved-me-from-the-sins-of-my-fathers-culture-podcast-old-school'},
+  {source:'Aeon',               title:'Why Stoicism Is One of the Best Mind-Hacks Ever Devised',                tags:['philosophy'],           url:'https://aeon.co/essays/why-stoicism-is-one-of-the-best-mind-hacks-ever-devised'},
+  {source:'Hoover Institution', title:'History\'s Historian',                                                    tags:['history','politics'],   url:'https://www.hoover.org/research/historys-historian'},
+  {source:'Big Think',          title:'10 Great Ideas from Philosophy in the Last 50 Years',                    tags:['philosophy','learning'],url:'https://bigthink.com/thinking/10-great-ideas-philosophy-last-50-years/'},
+  {source:'Engelsberg Ideas',   title:'How the Individual Invented the Modern West',                             tags:['history','philosophy'], url:'https://engelsbergideas.com/essays/how-the-individual-invented-the-modern-west/'},
+  {source:'National Geographic',title:'Decoding the Ancient Language Linear Elamite',                           tags:['history','learning'],   url:'https://www.nationalgeographic.com/history/article/decoding-ancient-languages-linear-elamite'},
+  {source:'Atlas Obscura',      title:'11 Secret Spaces Hiding in Famous Places',                                tags:['geography','history'],  url:'https://www.atlasobscura.com/articles/11-secret-spaces-hiding-in-famous-places'},
+  {source:'Engelsberg Ideas',   title:'In Search of Civilisation',                                              tags:['history','learning'],   url:'https://engelsbergideas.com/essays/in-search-of-civilisation/'},
+  {source:'The Critic',         title:'Britain\'s Identity Crisis Goes Beyond Immigration',                      tags:['history','politics'],   url:'https://thecritic.co.uk/britains-identity-crisis-goes-beyond-immigration/'},
+  {source:'The Daily Signal',   title:'The Politics and Policies of National Conservatism',                     tags:['politics'],             url:'https://www.dailysignal.com/2022/02/19/chris-demuth-presents-the-politics-and-policies-of-national-conservatism/'},
+  {source:'Persuasion',         title:'Harvey Mansfield on Liberal Education',                                   tags:['politics','philosophy'],url:'https://www.persuasion.community/p/mansfield'},
+  {source:'Nautilus',           title:'What\'s So Hard About Understanding Consciousness?',                      tags:['science','philosophy'], url:'https://nautil.us/whats-so-hard-about-understanding-consciousness-238421'},
+  {source:'Quanta Magazine',    title:'An Ancient Geometry Problem Falls to New Mathematical Techniques',        tags:['science','learning'],   url:'https://www.quantamagazine.org/an-ancient-geometry-problem-falls-to-new-mathematical-techniques-20220208/'},
+  {source:'Nautilus',           title:'Is the Hard Problem Really So Hard?',                                    tags:['philosophy','science'], url:'https://nautil.us/is-the-hard-problem-really-so-hard-421778'}
 ];
 
 /* ── Tab config ──────────────────────────────────── */
