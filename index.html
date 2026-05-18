@@ -577,10 +577,20 @@ document.addEventListener('keydown',function(e){
 });
 
 /* ── Init ────────────────────────────────────────── */
-currentWeek=getWeekIndex();
-runArchive(currentWeek);
-document.getElementById('week-label').textContent=weekLabel(currentWeek);
-switchTab('rp');
+function init(){
+  currentWeek=getWeekIndex();
+  runArchive(currentWeek);
+  document.getElementById('week-label').textContent=weekLabel(currentWeek);
+  switchTab('rp');
+}
+fetch('./recommendations.json')
+  .then(function(r){return r.json();})
+  .then(function(d){
+    if(d.rp&&d.rp.length) POOL.rp=d.rp;
+    if(d.ar&&d.ar.length) POOL.ar=d.ar;
+    init();
+  })
+  .catch(init);
 
 })();
 </script>
