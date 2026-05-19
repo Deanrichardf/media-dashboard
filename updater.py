@@ -13,18 +13,22 @@ import feedparser, requests
 
 REPO = Path(__file__).parent
 
-# ── Podcast shows (Apple Podcast ID → iTunes resolves RSS URL) ───────────────
+# ── Podcast shows ────────────────────────────────────────────────────────────
+# 'rss' overrides iTunes lookup (use when the Apple ID doesn't return feedUrl)
 PODCAST_SHOWS = [
     {'show': 'The Rest Is History',    'id': '1537788786', 'by': 'Tom Holland & Dominic Sandbrook', 'tags': ['history']},
     {'show': 'Triggernometry',         'id': '1375568988', 'by': 'Kisin & Foster',                  'tags': ['politics']},
     {'show': 'We Have Ways',           'id': '1457552694', 'by': 'James Holland & Al Murray',       'tags': ['history', 'ww2']},
     {'show': 'Modern Wisdom',          'id': '1347973549', 'by': 'Chris Williamson',                'tags': ['learning', 'philosophy']},
-    {'show': 'History Hit',            'id': '1437402037', 'by': 'Dan Snow',                        'tags': ['history']},
-    {'show': 'Intelligence Squared',   'id': '275541834',  'by': 'IQ2 Debates',                    'tags': ['politics', 'philosophy']},
+    {'show': 'History Hit',            'id': '1437402037', 'by': 'Dan Snow',                        'tags': ['history'],
+     'rss': 'https://feeds.acast.com/public/shows/c939f8d1-c4bc-478e-8bb9-e5343f9a7ab5'},
+    {'show': 'Intelligence Squared',   'id': '275541834',  'by': 'IQ2 Debates',                    'tags': ['politics', 'philosophy'],
+     'rss': 'https://feeds.megaphone.fm/PNP1207584390'},
     {'show': 'Philosophize This!',     'id': '659155419',  'by': 'Stephen West',                   'tags': ['philosophy']},
     {'show': 'In Our Time',            'id': '73330895',   'by': 'Melvyn Bragg',                   'tags': ['history', 'learning']},
     {'show': 'EconTalk',               'id': '135066958',  'by': 'Russ Roberts',                   'tags': ['learning']},
-    {'show': 'Cautionary Tales',       'id': '1484511501', 'by': 'Tim Harford',                    'tags': ['history', 'learning']},
+    {'show': 'Cautionary Tales',       'id': '1484511501', 'by': 'Tim Harford',                    'tags': ['history', 'learning'],
+     'rss': 'https://www.omnycontent.com/d/playlist/e73c998e-6e60-432f-8610-ae210140c5b1/c0ae8c6e-22f0-4e9b-ac1c-ae390037ac53/7f5a4714-6b10-4ccf-a424-ae390037ac70/podcast.rss'},
     {'show': 'Making Sense',           'id': '733163012',  'by': 'Sam Harris',                     'tags': ['philosophy', 'science']},
     {'show': 'Dan Carlin Hardcore History', 'id': '173001861', 'by': 'Dan Carlin',                 'tags': ['history']},
 ]
@@ -84,7 +88,7 @@ def fetch_recent_podcast_episodes() -> list[dict]:
     episodes = []
 
     for meta in PODCAST_SHOWS:
-        feed_url = get_rss_url(meta['id'])
+        feed_url = meta.get('rss') or get_rss_url(meta['id'])
         if not feed_url:
             print(f'  ! No RSS for {meta["show"]}', file=sys.stderr)
             continue
