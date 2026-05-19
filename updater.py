@@ -55,6 +55,19 @@ ARTICLE_FEEDS = [
 ARTICLES_PER_WEEK = 20
 RECENT_PODCASTS_TARGET = 10
 LOOKBACK_DAYS = 14   # search this far back for recent episodes
+BOOKS_TARGET = 20    # 10/week × 2-week pool rotation
+
+# Open Library queries — each scoped to 2025 publications
+BOOK_SEARCHES = [
+    {'q': 'subject:history first_publish_year:2025',              'tags': ['history']},
+    {'q': 'subject:"historical fiction" first_publish_year:2025', 'tags': ['fiction', 'history']},
+    {'q': 'subject:thriller first_publish_year:2025',             'tags': ['thriller']},
+    {'q': 'subject:mystery first_publish_year:2025',              'tags': ['mystery']},
+    {'q': 'subject:biography first_publish_year:2025',            'tags': ['history', 'learning']},
+    {'q': 'subject:politics first_publish_year:2025',             'tags': ['politics']},
+    {'q': 'subject:philosophy first_publish_year:2025',           'tags': ['philosophy']},
+    {'q': 'subject:science first_publish_year:2025',              'tags': ['science', 'learning']},
+]
 
 
 def get_rss_url(itunes_id: str) -> str | None:
@@ -153,6 +166,74 @@ def fetch_articles() -> list[dict]:
     return articles[:ARTICLES_PER_WEEK]
 
 
+def fetch_books() -> list[dict]:
+    """Fetch 2025-2026 books from Open Library matching user taste profile."""
+    import random
+    books: list[dict] = []
+    seen_titles: set[str] = set()
+    seen_authors: dict[str, int] = {}
+    per_search = max(3, BOOKS_TARGET // len(BOOK_SEARCHES) + 1)
+
+    for meta in BOOK_SEARCHES:
+        try:
+            r = requests.get(
+                'https://openlibrary.org/search.json',
+                params={
+                    'q': meta['q'],
+                    'limit': 40,
+                    'fields': 'title,author_name,first_publish_year,cover_i,isbn,key,language',
+                },
+                timeout=15,
+            )
+            docs = r.json().get('docs', [])
+        except Exception as e:
+            print(f'  ! Books API error ({meta["q"][:35]}): {e}', file=sys.stderr)
+            continue
+
+        count = 0
+        for doc in docs:
+            year = str(doc.get('first_publish_year', ''))
+            if year not in ('2025', '2026'):
+                continue
+            # Language: skip if explicitly non-English
+            lang = doc.get('language', [])
+            if lang and 'eng' not in lang:
+                continue
+            title = doc.get('title', '')
+            # Quality gate: cover + author + ISBN + sane title + no ALL-CAPS words
+            if not (doc.get('cover_i') and doc.get('author_name') and doc.get('isbn')):
+                continue
+            if not (3 < len(title) < 75):
+                continue
+            if any(w.isupper() and len(w) > 2 for w in title.split()):
+                continue
+            if title in seen_titles:
+                continue
+            author = doc['author_name'][0]
+            if seen_authors.get(author, 0) >= 1:
+                continue  # one book per author for variety
+            seen_titles.add(title)
+            seen_authors[author] = seen_authors.get(author, 0) + 1
+            ol_key = doc.get('key', '')
+            url = f'https://openlibrary.org{ol_key}' if ol_key else ''
+            if not url:
+                continue
+            books.append({
+                'title':  title,
+                'author': author,
+                'year':   year,
+                'tags':   meta['tags'],
+                'url':    url,
+                'cover':  f'https://covers.openlibrary.org/b/id/{doc["cover_i"]}-M.jpg',
+            })
+            count += 1
+            if count >= per_search:
+                break
+
+    random.shuffle(books)
+    return books[:BOOKS_TARGET]
+
+
 def git_commit_push(date_str: str):
     for cmd in [
         ['git', 'add', 'recommendations.json'],
@@ -168,13 +249,15 @@ def main():
 
     rp = fetch_recent_podcast_episodes()
     ar = fetch_articles()
+    bk = fetch_books()
 
-    print(f'  Podcasts: {len(rp)}  Articles: {len(ar)}')
+    print(f'  Podcasts: {len(rp)}  Articles: {len(ar)}  Books: {len(bk)}')
 
     out = {
         'generated': now.isoformat(),
         'rp': rp,
         'ar': ar,
+        'books': bk,
     }
 
     path = REPO / 'recommendations.json'

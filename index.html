@@ -8,11 +8,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0d12;--bg-elev:#131720;--bg-card:#161c26;--border:#252d3a;--border-h:#36414f;--text:#e4ecf5;--text-dim:#8895a7;--text-faint:#5c6a7a;--accent:#7c5cff;--spotify:#1db954;--amazon:#ff9900;--c-history:#d29a4a;--c-politics:#ff7a59;--c-philosophy:#9b8cff;--c-learning:#4dd4c6;--c-geography:#5fb9ff;--c-fiction:#b97cff;--c-thriller:#ff5577;--c-mystery:#ffb84d;--c-science:#5fb9ff;--c-ww2:#e57373;--c-rome:#ff9a3c}
+:root{--bg:#0f1319;--bg-elev:#171d2b;--bg-card:#1b2232;--border:#252d3a;--border-h:#36414f;--text:#e4ecf5;--text-dim:#8895a7;--text-faint:#5c6a7a;--accent:#7c5cff;--spotify:#1db954;--amazon:#ff9900;--c-history:#d29a4a;--c-politics:#ff7a59;--c-philosophy:#9b8cff;--c-learning:#4dd4c6;--c-geography:#5fb9ff;--c-fiction:#b97cff;--c-thriller:#ff5577;--c-mystery:#ffb84d;--c-science:#5fb9ff;--c-ww2:#e57373;--c-rome:#ff9a3c}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.5}
 #bg-img{position:fixed;inset:0;z-index:0;background-size:cover;background-position:center;opacity:0;transition:opacity 0.6s ease}
-.bg-overlay{position:fixed;inset:0;z-index:0;background:rgba(10,13,18,0.8);pointer-events:none}
+.bg-overlay{position:fixed;inset:0;z-index:0;background:rgba(15,19,25,0.78);pointer-events:none}
 .container{position:relative;z-index:1;max-width:1300px;margin:0 auto;padding:36px 24px 70px}
 @media(max-width:680px){.container{padding:20px 14px 50px}}
 header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:28px}
@@ -38,8 +38,9 @@ header h1{font-size:2rem;font-weight:800;letter-spacing:-0.025em;background:line
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:11px}
 @media(max-width:500px){.grid{grid-template-columns:1fr}}
 .card{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:6px;text-decoration:none;color:inherit;transition:border-color 0.14s,transform 0.12s,background 0.14s}
-.card:hover{border-color:var(--border-h);transform:translateY(-3px);background:#1a2030}
+.card:hover{border-color:var(--border-h);transform:translateY(-3px);background:#202840}
 .card:active{transform:translateY(-1px)}
+.book-row{display:flex;gap:12px;align-items:flex-start}.book-cover{width:54px;height:81px;object-fit:cover;border-radius:3px;flex-shrink:0;background:var(--bg-elev)}.book-info{flex:1;min-width:0}
 .card .show-lbl{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-faint);margin-bottom:2px}
 .card .c-title{font-size:0.94rem;font-weight:700;line-height:1.35;color:var(--text)}
 .card .c-sub{font-size:0.8rem;color:var(--text-dim);line-height:1.4}
@@ -110,7 +111,7 @@ header h1{font-size:2rem;font-weight:800;letter-spacing:-0.025em;background:line
   <div class="tabs" id="tabs">
     <button class="tab active" data-tab="rp">Recent Podcasts <span class="badge">10</span></button>
     <button class="tab" data-tab="op">Older Podcasts <span class="badge">20</span></button>
-    <button class="tab" data-tab="rb">Recent Books <span class="badge">5</span></button>
+    <button class="tab" data-tab="rb">Recent Books <span class="badge">10</span></button>
     <button class="tab" data-tab="ob">Older Books <span class="badge">10</span></button>
     <button class="tab" data-tab="ar">Weekly Articles <span class="badge">20</span></button>
   </div>
@@ -385,7 +386,7 @@ POOL.ar = [
 var TABS = {
   rp:{label:'Recent Podcasts', pool:POOL.rp, per:10, type:'podcast', openLabel:'Listen on Spotify', icon:ICON_SP},
   op:{label:'Older Podcasts',  pool:POOL.op, per:20, type:'podcast', openLabel:'Listen on Spotify', icon:ICON_SP},
-  rb:{label:'Recent Books',    pool:POOL.rb, per:5,  type:'book',    openLabel:'View on Amazon',    icon:ICON_AMZ},
+  rb:{label:'Recent Books',    pool:POOL.rb, per:10, type:'book',    openLabel:'View on Google Books', icon:ICON_LNK},
   ob:{label:'Older Books',     pool:POOL.ob, per:10, type:'book',    openLabel:'View on Amazon',    icon:ICON_AMZ},
   ar:{label:'Weekly Articles', pool:POOL.ar, per:20, type:'article', openLabel:'Read article',      icon:ICON_LNK}
 };
@@ -461,9 +462,11 @@ function buildCard(item, tabKey){
     html+='<div class="c-title">'+esc(item.title)+'</div>';
     html+='<div class="c-sub">'+esc(item.by)+'</div>';
   } else if(t.type==='book'){
+    if(item.cover){html+='<div class="book-row"><img class="book-cover" src="'+esc(item.cover)+'" alt="" loading="lazy"><div class="book-info">';}
     html+='<div class="show-lbl">'+esc(item.year)+'</div>';
     html+='<div class="c-title">'+esc(item.title)+'</div>';
     html+='<div class="c-sub">'+esc(item.author)+'</div>';
+    if(item.cover){html+='</div></div>';}
   } else {
     html+='<div class="show-lbl">'+esc(item.source)+'</div>';
     html+='<div class="c-title">'+esc(item.title)+'</div>';
@@ -586,8 +589,9 @@ function init(){
 fetch('./recommendations.json')
   .then(function(r){return r.json();})
   .then(function(d){
-    if(d.rp&&d.rp.length) POOL.rp=d.rp;
-    if(d.ar&&d.ar.length) POOL.ar=d.ar;
+    if(d.rp&&d.rp.length){POOL.rp=d.rp;TABS.rp.pool=d.rp;}
+    if(d.ar&&d.ar.length){POOL.ar=d.ar;TABS.ar.pool=d.ar;}
+    if(d.books&&d.books.length){POOL.rb=d.books;TABS.rb.pool=d.books;}
     init();
   })
   .catch(init);
