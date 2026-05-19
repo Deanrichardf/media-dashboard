@@ -1,5 +1,5 @@
 {
-  "generated": "2026-05-18T23:49:03.994682+00:00",
+  "generated": "2026-05-19T00:46:12.650146+00:00",
   "rp": [
     {
       "show": "The Rest Is History",
@@ -195,32 +195,6 @@
   ],
   "ar": [
     {
-      "source": "Quanta Magazine",
-      "title": "What Do Gödel’s Incompleteness Theorems Truly Mean?",
-      "tags": [
-        "science",
-        "learning"
-      ],
-      "url": "https://www.quantamagazine.org/what-do-godels-incompleteness-theorems-truly-mean-20260518/"
-    },
-    {
-      "source": "Smithsonian",
-      "title": "History Remembers Mary Boleyn as the Scandalous 'Other Boleyn Girl.' New Research Debunks the Myths Surrounding the Tudor Mistress",
-      "tags": [
-        "history"
-      ],
-      "url": "https://www.smithsonianmag.com/history/history-remembers-mary-boleyn-as-the-scandalous-other-boleyn-girl-new-research-debunks-the-myths-surrounding-the-tudor-mistress-180988703/"
-    },
-    {
-      "source": "Aeon",
-      "title": "How death came to Earth",
-      "tags": [
-        "philosophy",
-        "learning"
-      ],
-      "url": "https://aeon.co/videos/the-celestial-affair-that-made-us-mortal-an-animated-indian-myth"
-    },
-    {
       "source": "UnHerd",
       "title": "Trump is snatching the deep sea’s riches",
       "tags": [
@@ -228,102 +202,6 @@
         "philosophy"
       ],
       "url": "https://unherd.com/2026/05/trump-is-snatching-the-deep-seas-riches/"
-    },
-    {
-      "source": "Atlas Obscura",
-      "title": "The Hepworth Wakefield  in Wakefield, England",
-      "tags": [
-        "geography",
-        "history"
-      ],
-      "url": "https://www.atlasobscura.com/places/the-hepworth-wakefield"
-    },
-    {
-      "source": "Nautilus",
-      "title": "Why Did Humans Evolve to Favor One Hand Over the Other?",
-      "tags": [
-        "science",
-        "philosophy"
-      ],
-      "url": "https://nautil.us/why-did-humans-evolve-to-favor-one-hand-over-the-other-1280952/"
-    },
-    {
-      "source": "The Free Press",
-      "title": "What I Learned Cataloging the Sexual Violence of October 7",
-      "tags": [
-        "politics"
-      ],
-      "url": "https://www.thefp.com/p/what-i-learned-cataloging-the-sexual"
-    },
-    {
-      "source": "The Free Press",
-      "title": "Tyler Cowen: Wokeness Has Peaked. What Followed Is Worse.",
-      "tags": [
-        "politics"
-      ],
-      "url": "https://www.thefp.com/p/tyler-cowen-wokeness-has-peaked-what-followed-is-worse"
-    },
-    {
-      "source": "Big Think",
-      "title": "Less of the night sky is visible than ever before",
-      "tags": [
-        "philosophy",
-        "learning"
-      ],
-      "url": "https://bigthink.com/starts-with-a-bang/less-night-sky-visible-than-ever-before/"
-    },
-    {
-      "source": "Big Think",
-      "title": "The personality trait that can cost you in negotiations",
-      "tags": [
-        "philosophy",
-        "learning"
-      ],
-      "url": "https://bigthink.com/business/never-settle/"
-    },
-    {
-      "source": "Atlas Obscura",
-      "title": "Untuned Bell in Oslo, Norway",
-      "tags": [
-        "geography",
-        "history"
-      ],
-      "url": "https://www.atlasobscura.com/places/untuned-bell"
-    },
-    {
-      "source": "Quanta Magazine",
-      "title": "Rubin Tracks Skyscraper-Size Asteroids, Failed Supernovas, and Interstellar Visitors",
-      "tags": [
-        "science",
-        "learning"
-      ],
-      "url": "https://www.quantamagazine.org/rubin-tracks-skyscraper-size-asteroids-failed-supernovas-and-interstellar-visitors-20260515/"
-    },
-    {
-      "source": "The Daily Signal",
-      "title": "Xi Warned US Not to Fall Into ‘Thucydides Trap.’ What’s That Mean?",
-      "tags": [
-        "politics"
-      ],
-      "url": "https://www.dailysignal.com/2026/05/18/xi-thucydides-trap-whats-that-mean/"
-    },
-    {
-      "source": "Engelsberg Ideas",
-      "title": "The Bayeux Tapestry and the quest for Europe",
-      "tags": [
-        "history",
-        "philosophy"
-      ],
-      "url": "https://engelsbergideas.com/notebook/the-bayeux-tapestry-and-the-quest-for-europe/"
-    },
-    {
-      "source": "The Critic",
-      "title": "Fit for a queen",
-      "tags": [
-        "history",
-        "politics"
-      ],
-      "url": "https://thecritic.co.uk/issues/may-2026/fit-for-a-queen/"
     },
     {
       "source": "Nautilus",
@@ -335,13 +213,48 @@
       "url": "https://nautil.us/how-did-we-miss-the-asteroid-that-will-narrowly-miss-us-1280943/"
     },
     {
-      "source": "Engelsberg Ideas",
-      "title": "In defence of distraction",
+      "source": "Aeon",
+      "title": "Mathematics is out there",
+      "tags": [
+        "philosophy",
+        "learning"
+      ],
+      "url": "https://aeon.co/essays/for-sergiu-klainerman-maths-is-a-fact-to-be-divined"
+    },
+    {
+      "source": "Quanta Magazine",
+      "title": "Rubin Tracks Skyscraper-Size Asteroids, Failed Supernovas, and Interstellar Visitors",
+      "tags": [
+        "science",
+        "learning"
+      ],
+      "url": "https://www.quantamagazine.org/rubin-tracks-skyscraper-size-asteroids-failed-supernovas-and-interstellar-visitors-20260515/"
+    },
+    {
+      "source": "The Critic",
+      "title": "It’s high time we banned dogs",
       "tags": [
         "history",
-        "philosophy"
+        "politics"
       ],
-      "url": "https://engelsbergideas.com/notebook/in-defence-of-distraction/"
+      "url": "https://thecritic.co.uk/issues/may-2026/its-high-time-we-banned-dogs/"
+    },
+    {
+      "source": "Smithsonian",
+      "title": "Born and Raised in Philadelphia, This Loyalist Fled to England During the American Revolution. In His Absence, the Patriots Declared Him a Traitor and Seized His Property",
+      "tags": [
+        "history"
+      ],
+      "url": "https://www.smithsonianmag.com/history/born-and-raised-in-philadelphia-this-loyalist-fled-to-england-during-the-american-revolution-in-his-absence-the-patriots-declared-him-a-traitor-and-seized-his-property-180988705/"
+    },
+    {
+      "source": "Big Think",
+      "title": "Less of the night sky is visible than ever before",
+      "tags": [
+        "philosophy",
+        "learning"
+      ],
+      "url": "https://bigthink.com/starts-with-a-bang/less-night-sky-visible-than-ever-before/"
     },
     {
       "source": "Persuasion",
@@ -353,21 +266,317 @@
       "url": "https://www.persuasion.community/p/what-the-inuit-know-and-ai-doesnt"
     },
     {
+      "source": "The Daily Signal",
+      "title": "California School District Spends $300K to Partner With LGBTQ Center",
+      "tags": [
+        "politics"
+      ],
+      "url": "https://www.dailysignal.com/2026/05/18/california-school-district-lgbtq/"
+    },
+    {
+      "source": "UnHerd",
+      "title": "Why Brexit is back",
+      "tags": [
+        "politics",
+        "philosophy"
+      ],
+      "url": "https://unherd.com/2026/05/why-brexit-is-back/"
+    },
+    {
+      "source": "The Critic",
+      "title": "Fit for a queen",
+      "tags": [
+        "history",
+        "politics"
+      ],
+      "url": "https://thecritic.co.uk/issues/may-2026/fit-for-a-queen/"
+    },
+    {
+      "source": "The Daily Signal",
+      "title": "Xi Warned US Not to Fall Into ‘Thucydides Trap.’ What’s That Mean?",
+      "tags": [
+        "politics"
+      ],
+      "url": "https://www.dailysignal.com/2026/05/18/xi-thucydides-trap-whats-that-mean/"
+    },
+    {
+      "source": "The Free Press",
+      "title": "What I Learned Cataloging the Sexual Violence of October 7",
+      "tags": [
+        "politics"
+      ],
+      "url": "https://www.thefp.com/p/what-i-learned-cataloging-the-sexual"
+    },
+    {
       "source": "Aeon",
-      "title": "Mathematics is out there",
+      "title": "How death came to Earth",
       "tags": [
         "philosophy",
         "learning"
       ],
-      "url": "https://aeon.co/essays/for-sergiu-klainerman-maths-is-a-fact-to-be-divined"
+      "url": "https://aeon.co/videos/the-celestial-affair-that-made-us-mortal-an-animated-indian-myth"
     },
     {
-      "source": "Smithsonian",
-      "title": "Born and Raised in Philadelphia, This Loyalist Fled to England During the American Revolution. In His Absence, the Patriots Declared Him a Traitor and Seized His Property",
+      "source": "Persuasion",
+      "title": "When Civilian Space Becomes a Security Weapon",
+      "tags": [
+        "politics",
+        "philosophy"
+      ],
+      "url": "https://www.persuasion.community/p/when-civilian-space-becomes-a-security"
+    },
+    {
+      "source": "Engelsberg Ideas",
+      "title": "In defence of distraction",
+      "tags": [
+        "history",
+        "philosophy"
+      ],
+      "url": "https://engelsbergideas.com/notebook/in-defence-of-distraction/"
+    },
+    {
+      "source": "The Free Press",
+      "title": "Packing the Court Would Shred the Constitution",
+      "tags": [
+        "politics"
+      ],
+      "url": "https://www.thefp.com/p/packing-the-court-would-shred-the-constitution"
+    },
+    {
+      "source": "Engelsberg Ideas",
+      "title": "The Bayeux Tapestry and the quest for Europe",
+      "tags": [
+        "history",
+        "philosophy"
+      ],
+      "url": "https://engelsbergideas.com/notebook/the-bayeux-tapestry-and-the-quest-for-europe/"
+    },
+    {
+      "source": "Quanta Magazine",
+      "title": "What Do Gödel’s Incompleteness Theorems Truly Mean?",
+      "tags": [
+        "science",
+        "learning"
+      ],
+      "url": "https://www.quantamagazine.org/what-do-godels-incompleteness-theorems-truly-mean-20260518/"
+    },
+    {
+      "source": "Atlas Obscura",
+      "title": "Untuned Bell in Oslo, Norway",
+      "tags": [
+        "geography",
+        "history"
+      ],
+      "url": "https://www.atlasobscura.com/places/untuned-bell"
+    }
+  ],
+  "books": [
+    {
+      "title": "You Weren't Meant to Be Human",
+      "author": "Andrew Joseph White",
+      "year": "2025",
+      "tags": [
+        "science",
+        "learning"
+      ],
+      "url": "https://openlibrary.org/works/OL42563456W",
+      "cover": "https://covers.openlibrary.org/b/id/15125160-M.jpg"
+    },
+    {
+      "title": "Pensées",
+      "author": "Blaise Pascal",
+      "year": "2025",
+      "tags": [
+        "philosophy"
+      ],
+      "url": "https://openlibrary.org/works/OL45425261W",
+      "cover": "https://covers.openlibrary.org/b/id/15220557-M.jpg"
+    },
+    {
+      "title": "Reese Witherspoon Harlan Coben Novel",
+      "author": "Reese Witherspoon",
+      "year": "2025",
+      "tags": [
+        "mystery"
+      ],
+      "url": "https://openlibrary.org/works/OL42428608W",
+      "cover": "https://covers.openlibrary.org/b/id/15137830-M.jpg"
+    },
+    {
+      "title": "Wild Dark Shore",
+      "author": "Charlotte McConaghy",
+      "year": "2025",
+      "tags": [
+        "mystery"
+      ],
+      "url": "https://openlibrary.org/works/OL42424992W",
+      "cover": "https://covers.openlibrary.org/b/id/15146235-M.jpg"
+    },
+    {
+      "title": "Atmosphere",
+      "author": "Taylor Jenkins Reid",
+      "year": "2025",
+      "tags": [
+        "fiction",
+        "history"
+      ],
+      "url": "https://openlibrary.org/works/OL42412330W",
+      "cover": "https://covers.openlibrary.org/b/id/15098710-M.jpg"
+    },
+    {
+      "title": "More everything forever",
+      "author": "Adam Becker",
+      "year": "2025",
+      "tags": [
+        "philosophy"
+      ],
+      "url": "https://openlibrary.org/works/OL43199356W",
+      "cover": "https://covers.openlibrary.org/b/id/14960344-M.jpg"
+    },
+    {
+      "title": "Flip!",
+      "author": "Ngozi Ukazu",
+      "year": "2025",
+      "tags": [
+        "science",
+        "learning"
+      ],
+      "url": "https://openlibrary.org/works/OL42444975W",
+      "cover": "https://covers.openlibrary.org/b/id/15153400-M.jpg"
+    },
+    {
+      "title": "A Genocide Foretold",
+      "author": "Chris Hedges",
+      "year": "2025",
+      "tags": [
+        "politics"
+      ],
+      "url": "https://openlibrary.org/works/OL42399166W",
+      "cover": "https://covers.openlibrary.org/b/id/14839542-M.jpg"
+    },
+    {
+      "title": "The Secret of Secrets",
+      "author": "Dan Brown",
+      "year": "2025",
+      "tags": [
+        "thriller"
+      ],
+      "url": "https://openlibrary.org/works/OL42542598W",
+      "cover": "https://covers.openlibrary.org/b/id/15200463-M.jpg"
+    },
+    {
+      "title": "Karl Marx in America",
+      "author": "Andrew Hartman",
+      "year": "2025",
+      "tags": [
+        "politics"
+      ],
+      "url": "https://openlibrary.org/works/OL42394649W",
+      "cover": "https://covers.openlibrary.org/b/id/15094157-M.jpg"
+    },
+    {
+      "title": "The Book of Sheen",
+      "author": "Charlie Sheen",
+      "year": "2025",
+      "tags": [
+        "history",
+        "learning"
+      ],
+      "url": "https://openlibrary.org/works/OL44035236W",
+      "cover": "https://covers.openlibrary.org/b/id/15123657-M.jpg"
+    },
+    {
+      "title": "Shadow Ticket",
+      "author": "Thomas Pynchon",
+      "year": "2025",
+      "tags": [
+        "politics"
+      ],
+      "url": "https://openlibrary.org/works/OL44220096W",
+      "cover": "https://covers.openlibrary.org/b/id/15130634-M.jpg"
+    },
+    {
+      "title": "Shield of Sparrows",
+      "author": "Devney Perry",
+      "year": "2025",
+      "tags": [
+        "science",
+        "learning"
+      ],
+      "url": "https://openlibrary.org/works/OL42483262W",
+      "cover": "https://covers.openlibrary.org/b/id/15091609-M.jpg"
+    },
+    {
+      "title": "Phantom",
+      "author": "H. D. Carlton",
+      "year": "2025",
+      "tags": [
+        "thriller"
+      ],
+      "url": "https://openlibrary.org/works/OL42455033W",
+      "cover": "https://covers.openlibrary.org/b/id/15170466-M.jpg"
+    },
+    {
+      "title": "Dream Count",
+      "author": "Chimamanda Ngozi Adichie",
+      "year": "2025",
+      "tags": [
+        "fiction",
+        "history"
+      ],
+      "url": "https://openlibrary.org/works/OL42407991W",
+      "cover": "https://covers.openlibrary.org/b/id/15143740-M.jpg"
+    },
+    {
+      "title": "The River Is Waiting",
+      "author": "Wally Lamb",
+      "year": "2025",
+      "tags": [
+        "mystery"
+      ],
+      "url": "https://openlibrary.org/works/OL42428586W",
+      "cover": "https://covers.openlibrary.org/b/id/15093330-M.jpg"
+    },
+    {
+      "title": "Careless People",
+      "author": "Sarah Wynn-Williams",
+      "year": "2025",
       "tags": [
         "history"
       ],
-      "url": "https://www.smithsonianmag.com/history/born-and-raised-in-philadelphia-this-loyalist-fled-to-england-during-the-american-revolution-in-his-absence-the-patriots-declared-him-a-traitor-and-seized-his-property-180988705/"
+      "url": "https://openlibrary.org/works/OL42735465W",
+      "cover": "https://covers.openlibrary.org/b/id/14852090-M.jpg"
+    },
+    {
+      "title": "Mood Machine",
+      "author": "Liz Pelly",
+      "year": "2025",
+      "tags": [
+        "history"
+      ],
+      "url": "https://openlibrary.org/works/OL42337086W",
+      "cover": "https://covers.openlibrary.org/b/id/14833271-M.jpg"
+    },
+    {
+      "title": "Broken Country",
+      "author": "Clare Leslie Hall",
+      "year": "2025",
+      "tags": [
+        "fiction",
+        "history"
+      ],
+      "url": "https://openlibrary.org/works/OL42549801W",
+      "cover": "https://covers.openlibrary.org/b/id/15213082-M.jpg"
+    },
+    {
+      "title": "Ward D",
+      "author": "Freida McFadden",
+      "year": "2025",
+      "tags": [
+        "thriller"
+      ],
+      "url": "https://openlibrary.org/works/OL42406707W",
+      "cover": "https://covers.openlibrary.org/b/id/15125127-M.jpg"
     }
   ]
 }
